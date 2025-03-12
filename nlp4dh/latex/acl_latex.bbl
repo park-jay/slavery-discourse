@@ -1,0 +1,226 @@
+\begin{thebibliography}{42}
+\providecommand{\natexlab}[1]{#1}
+
+\bibitem[{Abebe et~al.(2020)Abebe, Barocas, Kleinberg, Levy, Raghavan, and Robinson}]{abebe2020roles}
+Rediet Abebe, Solon Barocas, Jon Kleinberg, Karen Levy, Manish Raghavan, and David~G Robinson. 2020.
+\newblock Roles for computing in social change.
+\newblock In \emph{Proceedings of the 2020 conference on fairness, accountability, and transparency}, pages 252--260.
+
+\bibitem[{Anderson(2006)}]{anderson2006imagined}
+Benedict Anderson. 2006.
+\newblock \emph{Imagined communities: Reflections on the origin and spread of nationalism}.
+\newblock Verso books.
+
+\bibitem[{Baldasty(1992)}]{baldasty_commercialization_1992}
+Gerald~J. Baldasty. 1992.
+\newblock \emph{The {Commercialization} of {News} in the {Nineteenth} {Century}}.
+\newblock Univ of Wisconsin Press.
+\newblock Google-Books-ID: eCG98jIAG\_MC.
+
+\bibitem[{Baumgartner(2022)}]{baumgartner_enforcing_2022}
+Alice~L. Baumgartner. 2022.
+\newblock Enforcing the {Fugitive} {Slave} {Acts} in the {South}: {Federalism}, {Irony}, and the {Conflict} of {Jurisdictions}, 1787–1861.
+\newblock \emph{Journal of Southern History}, 88(3):475--500.
+\newblock Publisher: The Southern Historical Association.
+
+\bibitem[{Bojanowski et~al.(2017)Bojanowski, Grave, Joulin, and Mikolov}]{bojanowski_enriching_2017}
+Piotr Bojanowski, Edouard Grave, Armand Joulin, and Tomas Mikolov. 2017.
+\newblock Enriching word vectors with subword information.
+\newblock \emph{Transactions of the association for computational linguistics}, 5:135--146.
+\newblock Publisher: MIT Press.
+
+\bibitem[{Chiron et~al.(2017)Chiron, Doucet, Coustaty, Visani, and Moreux}]{chiron_impact_2017}
+Guillaume Chiron, Antoine Doucet, Mickaël Coustaty, Muriel Visani, and Jean-Philippe Moreux. 2017.
+\newblock Impact of {OCR} errors on the use of digital libraries: towards a better access to information.
+\newblock In \emph{2017 {ACM}/{IEEE} {Joint} {Conference} on {Digital} {Libraries} ({JCDL})}, pages 1--4. IEEE.
+
+\bibitem[{Cohen(1960)}]{cohen_coefficient_1960}
+Jacob Cohen. 1960.
+\newblock A coefficient of agreement for nominal scales.
+\newblock \emph{Educational and psychological measurement}, 20(1):37--46.
+\newblock Publisher: Sage Publications Sage CA: Thousand Oaks, CA.
+
+\bibitem[{Cordell(2015)}]{cordell_reprinting_2015}
+Ryan Cordell. 2015.
+\newblock Reprinting, circulation, and the network author in antebellum newspapers.
+\newblock \emph{American Literary History}, 27(3):417--445.
+\newblock Publisher: Oxford University Press.
+
+\bibitem[{Cordell and Mullen(2017)}]{cordell__2017}
+Ryan Cordell and Abby Mullen. 2017.
+\newblock " {Fugitive} {Verses}”: {The} {Circulation} of {Poems} in {Nineteenth}-{Century} {American} {Newspapers}.
+\newblock \emph{American Periodicals}, 27(1):29--52.
+\newblock Publisher: JSTOR.
+
+\bibitem[{Cordell et~al.(2020)Cordell, Smith, Mullen, Fitzgerald, and Kinias}]{cordell2020going}
+Ryan Cordell, David~A Smith, Abby Mullen, Jonathan~D Fitzgerald, and T~Kinias. 2020.
+\newblock \emph{Going the Rounds: Virality in Nineteenth-Century American Newspapers}.
+\newblock University of Minnesota Press, Forthcoming.
+
+\bibitem[{Fagan(2016{\natexlab{a}})}]{fagan2016black}
+Benjamin Fagan. 2016{\natexlab{a}}.
+\newblock \emph{The Black Newspaper and the Chosen Nation}.
+\newblock University of Georgia Press.
+
+\bibitem[{Fagan(2016{\natexlab{b}})}]{fagan2016chronicling}
+Benjamin Fagan. 2016{\natexlab{b}}.
+\newblock Chronicling white america.
+\newblock \emph{American Periodicals: A Journal of History \& Criticism}, 26(1):10--13.
+
+\bibitem[{Franzosi et~al.(2012)Franzosi, De~Fazio, and Vicari}]{franzosi_ways_2012}
+Roberto Franzosi, Gianluca De~Fazio, and Stefania Vicari. 2012.
+\newblock Ways of measuring agency: an application of quantitative narrative analysis to lynchings in {Georgia} (1875–1930).
+\newblock \emph{Sociological Methodology}, 42(1):1--42.
+\newblock Publisher: Sage Publications Sage CA: Los Angeles, CA.
+
+\bibitem[{Gabrial(2004)}]{gabrial2004melancholy}
+Brian~Ray Gabrial. 2004.
+\newblock \emph{“The melancholy effect of popular excitement”: Discourse about slavery and the social construction of the slave rebel and conspirator in newspapers}.
+\newblock Ph.D. thesis, University of Minnesota.
+
+\bibitem[{Gatewood(2000)}]{gatewood2000aristocrats}
+Willard~B Gatewood. 2000.
+\newblock \emph{Aristocrats of color: The black elite, 1880--1920}.
+\newblock University of Arkansas Press.
+
+\bibitem[{Glazer and Key(1996)}]{glazer_carry_1996}
+Lee Glazer and Susan Key. 1996.
+\newblock Carry me back: {Nostalgia} for the old {South} in nineteenth-century popular culture.
+\newblock \emph{Journal of American Studies}, 30(1):1--24.
+\newblock Publisher: Cambridge University Press.
+
+\bibitem[{Griebel et~al.(2024)Griebel, Cohen, Li, Park, Liu, Perkins, and Underwood}]{griebel2024locating}
+Sarah Griebel, Becca Cohen, Lucian Li, Jaihyun Park, Jiayu Liu, Jana Perkins, and Ted Underwood. 2024.
+\newblock Locating the leading edge of cultural change.
+\newblock In \emph{CHR 2024: Computational Humanities Research Conference}, pages 232--245.
+
+\bibitem[{Hajiali et~al.(2022)Hajiali, Fonseca~Cacho, and Taghva}]{hajiali_generating_2022}
+Mahdi Hajiali, Jorge~Ramón Fonseca~Cacho, and Kazem Taghva. 2022.
+\newblock Generating {Correction} {Candidates} for {OCR} {Errors} using {BERT} {Language} {Model} and {FastText} {SubWord} {Embeddings}.
+\newblock In \emph{Intelligent {Computing}: {Proceedings} of the 2021 {Computing} {Conference}, {Volume} 1}, pages 1045--1053. Springer.
+
+\bibitem[{Hengchen et~al.(2021)Hengchen, Ros, Marjanen, and Tolonen}]{hengchen_data-driven_2021}
+Simon Hengchen, Ruben Ros, Jani Marjanen, and Mikko Tolonen. 2021.
+\newblock A data-driven approach to studying changing vocabularies in historical newspaper collections.
+\newblock \emph{Digital scholarship in the humanities}, 36(Supplement\_2):ii109--ii126.
+\newblock Publisher: Oxford University Press.
+
+\bibitem[{Jiang et~al.(2021)Jiang, Hu, Worthey, Dubnicek, Underwood, and Downie}]{jiang_impact_2021}
+Ming Jiang, Yuerong Hu, Glen Worthey, Ryan~C. Dubnicek, Ted Underwood, and J.~Stephen Downie. 2021.
+\newblock Impact of {OCR} {Quality} on {BERT} {Embeddings} in the {Domain} {Classification} of {Book} {Excerpts}.
+\newblock In \emph{{CHR}}, pages 266--279.
+
+\bibitem[{Klein et~al.(2015)Klein, Eisenstein, and Sun}]{klein_exploratory_2015}
+Lauren~F. Klein, Jacob Eisenstein, and Iris Sun. 2015.
+\newblock Exploratory thematic analysis for digitized archival collections.
+\newblock \emph{Digital scholarship in the humanities}, 30(suppl\_1):i130--i141.
+\newblock Publisher: Oxford University Press.
+
+\bibitem[{Kwak et~al.(2020)Kwak, An, and Ahn}]{kwak2020systematic}
+Haewoon Kwak, Jisun An, and Yong-Yeol Ahn. 2020.
+\newblock A systematic media frame analysis of 1.5 million new york times articles from 2000 to 2017.
+\newblock In \emph{Proceedings of the 12th ACM Conference on Web Science}, pages 305--314.
+
+\bibitem[{Lennon(2016)}]{lennon_slave_2016}
+Conor Lennon. 2016.
+\newblock Slave escape, prices, and the fugitive slave act of 1850.
+\newblock \emph{The Journal of Law and Economics}, 59(3):669--695.
+\newblock Publisher: University of Chicago Press Chicago, IL.
+
+\bibitem[{Levenshtein(1966)}]{levenshtein_binary_1966}
+Vladimir~I. Levenshtein. 1966.
+\newblock Binary codes capable of correcting deletions, insertions, and reversals.
+\newblock In \emph{Soviet physics doklady}, volume~10, pages 707--710. Soviet Union.
+\newblock Issue: 8.
+
+\bibitem[{Lloyd(1939)}]{lloyd_slavery_1939}
+Arthur~Young Lloyd. 1939.
+\newblock \emph{The {Slavery} {Controversy}, 1831-1860}.
+\newblock University of North Carolina Press.
+
+\bibitem[{Lorang and Zillig(2012)}]{lorang_electronic_2012}
+Elizabeth Lorang and Brian~Pytlik Zillig. 2012.
+\newblock Electronic text analysis and nineteenth-century newspapers: {TokenX} and the {Richmond} {Daily} {Dispatch}.
+\newblock \emph{Texas Studies in Literature and Language}, 54(3):303--323.
+\newblock Publisher: University of Texas Press.
+
+\bibitem[{Malcolm(1990)}]{malcolm1990malcolm}
+X~Malcolm. 1990.
+\newblock \emph{Malcolm X speaks: Selected speeches and statements}.
+\newblock Grove Press.
+
+\bibitem[{McPherson(2003)}]{mcpherson_reconstructing_2003}
+Tara McPherson. 2003.
+\newblock \emph{Reconstructing {Dixie}: {Race}, gender, and nostalgia in the imagined {South}}.
+\newblock Duke University Press.
+
+\bibitem[{Meyer(2017)}]{meyer_economics_2017}
+John~R. Meyer. 2017.
+\newblock \emph{The {Economics} of {Slavery}: {And} {Other} {Studies} in {Econometric} {History}}.
+\newblock Routledge.
+
+\bibitem[{Mikolov et~al.(2013)Mikolov, Sutskever, Chen, Corrado, and Dean}]{mikolov_distributed_2013}
+Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg~S. Corrado, and Jeff Dean. 2013.
+\newblock Distributed representations of words and phrases and their compositionality.
+\newblock \emph{Advances in neural information processing systems}, 26:1--9.
+
+\bibitem[{Monroe et~al.(2008)Monroe, Colaresi, and Quinn}]{monroe2008fightin}
+Burt~L Monroe, Michael~P Colaresi, and Kevin~M Quinn. 2008.
+\newblock Fightin'words: Lexical feature selection and evaluation for identifying the content of political conflict.
+\newblock \emph{Political Analysis}, 16(4):372--403.
+
+\bibitem[{Narayan(2020)}]{narayan_slavery_2020}
+Rosalyn Narayan. 2020.
+\newblock \emph{Slavery in print: slaveholding ideology and anxiety in antebellum southern newspapers, 1830-1861}.
+\newblock Ph.D. thesis, University of Warwick.
+
+\bibitem[{Park and Cordell(2023)}]{park2023quantitative}
+Jaihyun Park and Ryan Cordell. 2023.
+\newblock A quantitative discourse analysis of asian workers in the us historical newspapers.
+\newblock In \emph{The Joint 3rd International Conference on Natural Language Processing for Digital Humanities and 8th International Workshop on Computational Linguistics for Uralic Languages}, page~7.
+
+\bibitem[{Park et~al.(2024)Park, Yang, Tolbert, and Bunsold}]{park2024you}
+Jaihyun Park, JungHwan Yang, Amanda Tolbert, and Katherine Bunsold. 2024.
+\newblock You change the way you talk: Examining the network, toxicity and discourse of cross-platform users on twitter and parler during the 2020 us presidential election.
+\newblock \emph{Journal of Information Science}, page 01655515241238405.
+
+\bibitem[{Pasley(2002)}]{pasley_tyranny_2002}
+Jeffrey~L. Pasley. 2002.
+\newblock \emph{The tyranny of printers: {Newspaper} politics in the early {American} republic}.
+\newblock University of Virginia Press.
+
+\bibitem[{Rae(2018)}]{rae_great_2018}
+Noel Rae. 2018.
+\newblock \emph{The {Great} {Stain}: {Witnessing} {American} {Slavery}}.
+\newblock Abrams.
+
+\bibitem[{Smith et~al.(2014)Smith, Cordell, Dillon, Stramp, and Wilkerson}]{smith_detecting_2014}
+David~A. Smith, Ryan Cordell, Elizabeth~Maddock Dillon, Nick Stramp, and John Wilkerson. 2014.
+\newblock \href {https://doi.org/10.1109/JCDL.2014.6970166} {Detecting and modeling local text reuse}.
+\newblock In \emph{{IEEE}/{ACM} {Joint} {Conference} on {Digital} {Libraries}}, pages 183--192.
+
+\bibitem[{Smith et~al.(2015)Smith, Cordell, and Mullen}]{smith_computational_2015}
+David~A. Smith, Ryan Cordell, and Abby Mullen. 2015.
+\newblock \href {https://doi.org/10.1093/alh/ajv029} {Computational {Methods} for {Uncovering} {Reprinted} {Texts} in {Antebellum} {Newspapers}}.
+\newblock \emph{American Literary History}, 27(3):E1--E15.
+
+\bibitem[{Soni et~al.(2021)Soni, Klein, and Eisenstein}]{soni2021abolitionist}
+Sandeep Soni, Lauren~F Klein, and Jacob Eisenstein. 2021.
+\newblock Abolitionist networks: Modeling language change in nineteenth-century activist newspapers.
+\newblock \emph{Journal of Cultural Analytics}, 6(1).
+
+\bibitem[{Traub et~al.(2015)Traub, van Ossenbruggen, and Hardman}]{traub_impact_2015}
+Myriam~C. Traub, Jacco van Ossenbruggen, and Lynda Hardman. 2015.
+\newblock \href {https://doi.org/10.1007/978-3-319-24592-8_19} {Impact {Analysis} of {OCR} {Quality} on {Research} {Tasks} in {Digital} {Archives}}.
+\newblock In \emph{Research and {Advanced} {Technology} for {Digital} {Libraries}}, Lecture {Notes} in {Computer} {Science}, pages 252--263, Cham. Springer International Publishing.
+
+\bibitem[{Viera and Garrett(2005)}]{viera_understanding_nodate}
+Anthony~J Viera and Joanne~M Garrett. 2005.
+\newblock Understanding {Interobserver} {Agreement}: {The} {Kappa} {Statistic}.
+\newblock \emph{Family Medicine}.
+
+\bibitem[{Willaert et~al.(2022)Willaert, Banisch, Van~Eecke, and Beuls}]{willaert2022tracking}
+Tom Willaert, Sven Banisch, Paul Van~Eecke, and Katrien Beuls. 2022.
+\newblock Tracking causal relations in the news: data, tools, and models for the analysis of argumentative statements in online media.
+
+\end{thebibliography}

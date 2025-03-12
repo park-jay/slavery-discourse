@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2024)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: acl_latex.aux
+The style file: acl_natbib.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Database file #1: custom.bib
+Warning--entry type for "willaert2022tracking" isn't style-file defined
+--line 614 of file custom.bib
+You've used 42 entries,
+            3734 wiz_defined-function locations,
+            989 strings with 14422 characters,
+and the built_in function-call counts, 28542 in all, are:
+= -- 2598
+> -- 1050
+< -- 37
++ -- 384
+- -- 322
+* -- 1692
+:= -- 4248
+add.period$ -- 184
+call.type$ -- 42
+change.case$ -- 337
+chr.to.int$ -- 45
+cite$ -- 42
+duplicate$ -- 1845
+empty$ -- 2254
+format.name$ -- 421
+if$ -- 6333
+int.to.chr$ -- 2
+int.to.str$ -- 1
+missing$ -- 390
+newline$ -- 226
+num.names$ -- 168
+pop$ -- 810
+preamble$ -- 1
+purify$ -- 275
+quote$ -- 0
+skip$ -- 1596
+stack$ -- 0
+substring$ -- 1167
+swap$ -- 961
+text.length$ -- 15
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 345
+warning$ -- 0
+while$ -- 184
+width$ -- 0
+write$ -- 567
+(There was 1 warning)

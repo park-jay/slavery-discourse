@@ -1,0 +1,622 @@
+% This must be in the first 5 lines to tell arXiv to use pdfLaTeX, which is strongly recommended.
+\pdfoutput=1
+% In particular, the hyperref package requires pdfLaTeX in order to break URLs across lines.
+
+\documentclass[11pt]{article}
+
+% Change "review" to "final" to generate the final (sometimes called camera-ready) version.
+% Change to "preprint" to generate a non-anonymous version with page numbers.
+\usepackage[final]{acl}
+% \usepackage{acl}
+% Standard package includes
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage{appendix}
+% \graphicspath{{Fig/}}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{nccmath}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+% For proper rendering and hyphenation of words containing Latin characters (including in bib files)
+\usepackage[T1]{fontenc}
+% For Vietnamese characters
+% \usepackage[T5]{fontenc}
+% See https://www.latex-project.org/help/documentation/encguide.pdf for other character sets
+
+% This assumes your files are encoded as UTF8
+\usepackage[utf8]{inputenc}
+
+% This is not strictly necessary, and may be commented out,
+% but it will improve the layout of the manuscript,
+% and will typically save some space.
+\usepackage{microtype}
+
+% This is also not strictly necessary, and may be commented out.
+% However, it will improve the aesthetics of text in
+% the typewriter font.
+\usepackage{inconsolata}
+
+%Including images in your LaTeX document requires adding
+%additional package(s)
+\usepackage{graphicx}
+
+% If the title and author information does not fit in the area allocated, uncomment the following
+%
+%\setlength\titlebox{<dim>}
+%
+% and set <dim> to something 5cm or larger.
+
+\title{A data-driven investigation of euphemistic language: \\
+Comparing the usage of “slave” and “servant” \\ 
+in 19th century US newspapers}
+
+% Author information can be set in various styles:
+% For several authors from the same institution:
+% \author{Author 1 \and ... \and Author n \\
+%         Address line \\ ... \\ Address line}
+% if the names do not fit well on one line use
+%         Author 1 \\ {\bf Author 2} \\ ... \\ {\bf Author n} \\
+% For authors from different institutions:
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \And  ... \And
+%         Author n \\ Address line \\ ... \\ Address line}
+% To start a separate ``row'' of authors use \AND, as in
+% \author{Author 1 \\ Address line \\  ... \\ Address line
+%         \AND
+%         Author 2 \\ Address line \\ ... \\ Address line \And
+%         Author 3 \\ Address line \\ ... \\ Address line}
+
+\author{Jaihyun Park \\
+  Wee Kim Wee School of \\
+  Communication and Information \\
+  Nanyang Technological University \\
+  % Affiliation / Address line 2 \\
+  % Affiliation / Address line 3 \\
+  \texttt{jay.park@ntu.edu.sg} \\\And
+  Ryan Cordell \\
+  School of Information Sciences \\
+  University of Illinois at \\
+  Urbana-Champaign \\
+  \texttt{rcordell@illinois.edu} \\}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+\textcolor{red}{Warning: This paper contains examples of offensive language targeting marginalized populations.} 
+
+This study investigates the usage of ``slave'' and ``servant'' in the 19th century US newspapers using computational methods. While both terms were used to refer to enslaved African Americans, they were used in distinct ways. In the Chronicling America corpus, we included possible OCR errors by using FastText embedding and excluded text reprints to consider text reprint culture in the 19th century. Word2vec embedding was used to find semantically close words to ``slave'' and ``servant'' and log-odds ratio was calculated to identify over-represented discourse words in the Southern and Northern newspapers. We found that ``slave'' is associated with socio-economic, legal, and administrative words, however, ``servant'' is linked to religious words in the Northern newspapers while Southern newspapers associated ``servant'' with domestic and familial words. We further found that slave discourse words in Southern newspapers are more prevalent in Northern newspapers while servant discourse words from each side are prevalent in their own region. This study contributes to the understanding of how newspapers created different discourses around enslaved African Americans in the 19th century US.
+
+\end{abstract}
+
+\section{Introduction}
+
+In the United States before the Civil War, free Black Americans and white abolitionists challenged the moral grounds of slavery using a range of means and media, from newspapers that exposed the horrors that enslaved people were subjected to in the American South, to first-hand accounts of former slaves recounting their suffering and their struggle for freedom, to fictional narratives that sought to levy readers’ sympathies toward Black Americans into 
+advocacy against slavery. 
+Pro-slavery advocates used the same media to undermine abolitionists’ charges and to defend slavery, arguing not simply for its necessity but for its rectitude, 
+even its sanctity. 
+Pro-slavery rhetoric often relied on a domestic, sentimental account of slaves’ lives that sidestepped the brutal realities of forced labor by focusing instead on supposed familial bonds between ``house slaves'' and the white women and children who owned them, the religious devotion advocates claimed slavery inculcated in enslaved African Americans, or the reported gratitude of slaves for their condition. 
+Such myths underlay everything from newspaper editorials to pro-slavery novels, such as the ``Anti-Tom'' genre that arose to counter the popularity of Harriet Beecher Stowe’s bestseller, \textit{Uncle Tom’s Cabin}. 
+In works such as \textit{Uncle Robin in His Cabin in Virginia, And Top Without One in Boston} —the central premise of which is outlined in the title — pro-slavery writers sought to contrast an idyllic depiction of Southern slavery 
+— what they euphemistically termed “our peculiar institution” — with industrial horrors in the North. 
+
+This research investigates this euphemistic rhetoric through an investigation of two closely linked but rhetorically contrasting terms in Civil War-era US newspapers: slave and servant. Both terms were used to refer to enslaved Black Americans, but they were employed in distinct ways. 
+While the word ``slave'' engaged with the slave system directly, marking discourse about legal and political debates around slavery, ``servant'' was more often used euphemistically to identify enslaved people who could be more easily cast into the domestic, sentimental narratives espoused by pro-slavery advocates. 
+The latter term can refer to different forms of servitude, including both enslaved workers in the American South and paid domestic help in Northern states, and its use in pro-slavery newspapers to describe enslaved Black Americans deliberately blurred those lines. 
+% The corpus we explore in this study helps us better understand 
+% how even politically opposed newspapers participated in 
+% intersubjective modes of discourse. 
+% Our goal is not to make claims about the lived experience of Black Americans during this period, but to understand the rhetorical constructions that communicated ideas about enslaved Black Americans to white newspaper readers. 
+
+In newspaper writing, ``slave'' is a more generic word that is used to discuss both enslaved Black Americans, as well as to reference legal and political debates around the institution of slavery itself.
+``Servant'' is a more specific term most often used to describe slaves who filled domestic—and less obviously abusive—roles in Southern homes. 
+Servants were described as better-dressed and well fed, and typically lived in the attic or basement of their master\`s house \citep{malcolm1990malcolm}, where they ostensibly enjoyed a better quality of life \citep{gatewood2000aristocrats}.
+% Using these two words we explore how newspapers run by 
+% white editors `stereotyped' enslaved Black Americans, 
+% even as those editors often used literal stereotypes 
+% to print text during the period \citep{mazzaferro_edition_2018}.
+
+Any type of text published through newspapers could shape the discourse in the public sphere for editors and readers as newspapers played a role in constituting \textit{imagined communities} in the 19th century \citep{anderson2006imagined}. 
+Whether newspapers supported abolition or defended slavery, they nonetheless filtered their understanding of Black Americans through stereotypical filters, while typically excluding Black Americans themselves from their discourse\footnote{For more on Black-owned- and -operated newspapers, see \textit{The Black Newspaper and the Chosen Nation} \citep{fagan2016black}.
+In another article \textit{``Chronicling White America,''} \citeauthor{fagan2016chronicling} describes how the collection processes for the Library of Congress's Chronicling America collection have often excluded Black newspapers \citep{fagan2016chronicling}. In part due to this facet of our data, our analyses focus on the stereotypical discourses about Black Americans within white newspapers - to include newspapers that were abolitionist in stance, but run and operated by white editors. 
+In future, work, we will delve into how this discourse shifts in newspapers run by Black editors}.
+In this paper, we present a computational approach to studying the use of these two terms in a corpus of 19th century newspapers and seek to answer two primary research questions:
+
+\begin{itemize}
+  \item RQ 1. What are the words that are most similar to ``slave'' and ``servant'' in the corpus of Southern and Northern newspapers?
+    \begin{itemize}
+      \item RQ 1.1. How do the words that are most similar to ``slave'' and ``servant'' differ among the Northern newspapers and among the Southern newspapers? (Within-newspaper analysis)
+      \item RQ 1.2. How do the words that are most similar to ``slave'' and ``servant'' differ between the Southern newspapers and Northern newspapers? (Cross-newspaper analysis)
+    \end{itemize}
+  \item RQ 2. How prevalent are the discourse words from the Southern and Northern newspapers in the entire corpus? 
+\end{itemize}
+
+To support open science and transparent data science, we publish the code used in this study at \url{available-upon-acceptance}.
+
+\section{Related Works}
+
+Scholars of American history, literature, and culture have argued persuasively that while newspapers were not new in the 19th century, they were newly prevalent.
+Drawing on data from the Library of Congress's US Newspaper Directory, US newspapers grew ``from a few hundred papers in 1800 to over 12,000 by the end of the century.'' \cite{cordell2020going} 
+Beyond the simple scale of this shift, the variety, price, style, and intended audiences for newspapers shifted dramatically during this same period, such that the term ``newspaper'' suddenly encompassed a much wider range of periodicals than existed at the beginning of the century, including merchant papers, penny papers, illustrated family papers, and much more.
+
+This rapidly-growing medium was at the time both highly partisan and strident, as editors debated politiciansand each other about political and social issues. 
+The voice of newspapers in the 19th century was strongly affiliated with parties and particular political action groups, as modern ideas of journalistic impartiality did not evolve until the early 20th century \citep{pasley_tyranny_2002}. 
+Similarly, \citet{baldasty_commercialization_1992} argued newspapers during the antebellum period formed close ties with political parties and factions to gain financial support. Newspapers spoke from the perspective of a ``network author'' that positioned the voice of any individual newspaper within the collective operations of larger political and social discourse \citep{cordell_reprinting_2015}.
+Because newspapers have power to frame and manipulate discourse around political and social issues \citep{willaert2022tracking}, researchers have much to learn about how newspaper discourse operated at scale, or how it operated between different regions or time periods.
+
+As \citet{soni2021abolitionist} demonstrate, ``newspapers played a crucial role in spreading information and shaping public opinion about the abolition of slavery and related social justice issues \dots and now serve as a primary source of information about abolition for scholars today.''
+This points to a primary challenge facing scholars seeking to use historical newspapers to understand discourses about slavery, as ``those edited by white people (and white men in particular) have been more fully preserved, and therefore, are more accessible to researchers,'' including in most digitized corpora. 
+% Much scholarship focused on slavery as represented
+% in newspapers has relied methodologically on content analysis
+% and narrative analysis \citep{gabrial2004melancholy, narayan_slavery_2020} 
+
+Though some data-driven work on historical newspapers has appeared in recent years, the scale of digital collections argues for more research that will supplement the findings and analysis from qualitative scholars \citep{gabrial2004melancholy,narayan_slavery_2020}. 
+Scholars in digital humanities have taken advantage of digitized text to study culture \cite{griebel2024locating} and history of the past. 
+Especially, newspapers as a source of data attracted computational humanities researchers and they leveraged computational methods \citep{park2023quantitative} such as topic modeling \cite{hengchen_data-driven_2021,klein_exploratory_2015} and word embedding models \cite{soni2021abolitionist} to learn about the past. 
+% \citet{hengchen_data-driven_2021} used topic modeling to understand changes in immigrant discourse from large newspaper collections. 
+% Similarly, \citet{soni2021abolitionist} used a diachronic embedding model to trace the trajectory of changes in the semantics of words from abolitionist newspapers.
+% \citet{klein_exploratory_2015} also used LDA topic modeling on abolitionist newspapers to increase the process of sense-making by prototyping a visualization toolkit. 
+
+In conjunction with GIS (Geolocation Information System), \citet{franzosi_ways_2012} used quantitative narrative analysis to focus on 5W (Who, What, When, Where, and Why) from a journalist perspective to process essential information about lynching to visualize occurrences of lynching on maps.
+Despite abundant scholarly work developing quantitative approaches to studying anti-slavery newspapers, thus far no work has sought to address indirect writing, such as euphemism and stereotypes, computationally. 
+For example, \citet{narayan_slavery_2020} conducted research on Southern newspapers to argue that there was a fear toward Black Americans due to the possibilities of riot and political turmoil, but this paper does not address the question of stereotyping directly. 
+
+More relevant to our study, \citet{gabrial2004melancholy} claimed that there is discourse in newspapers around the idea of ``a good negro'' by showing cases where newspapers reported that they could stop race riots thanks to ``loyal'' Black Americans (e.g., ``a servant prompted by attachment to his master revealed the conspiracy'', ``some faithful Blacks had informed the Charleston City Council'' p.310). 
+The work of \citet{gabrial2004melancholy} illustrates that newspapers framed accounts of Black Americans to maintain white supremacy.
+
+In this study, we seek not to read between the lines of predominantly white-edited newspapers to identify secretly liberatory language, but instead to read directly, using computational methods, the way that white editors on both sides of the political spectrum, from the abolitionist (e.g.,textit{Anti-Slavery Bugle} (New Lisbon, Ohio)) to the pro-slavery (e.g., \textit{Daily Dispatch} (Richmond, Virginia)), deployed contrasting stereotypes of Black Americans for their own rhetorical purposes. 
+We explore how ``slaves'' and ``servants'' — words which are shorthand for broader discourses — were discussed in newspapers between the introduction of the Fugitive Slave Act of 1850 and the end of the Civil War, and then compare that discourse in abolitionist newspapers, largely located in the North, to discourse in pro-slavery Southern papers. 
+By approaching racial bias embedded in language use within newspapers, rather than trying to identify justifications for stereotypical rhetoric, we seek to use computing ``as a diagnostic, helping us to understand and measure social problems with precision and clarity,'' as well ``as synecdoche'' that ``makes long-standing social problems newly salient in the public eye''\citep{abebe2020roles}.
+
+\section{Data} \label{data}
+\subsection{Data Collection} \label{data collection}
+
+Among many available public datasets for 19th century newspapers, we used Chronicling America as a source for data collection. 
+We did not use any other sources in order to keep consistency in OCR errors (Some digitized newspapers have article breaks, meaning document is article-level but Chronicling America does not have article breaks, having digitization at page-level.).
+Of data available in Chronicling America, if it is digitized through a high-resolution, lossless digital image of a microfilm copy, then the quality of data is relatively reliable \citep{lorang_electronic_2012}. 
+If we complement the dataset with perfectly transcribed digital text or use computer vision to create our own dataset, then OCR errors are not controlled in the word embedding model. 
+Biases from the computer vision algorithm could have impacted the quality of the word embedding model that worked differently from OCR error from Chronicling America. 
+
+% For our study, we collected OCRed text that was automatically transcribed by Chronicling America. We developed the pipeline for API to collect data from Chronicling America. 
+% The design of pipeline is as follows. 
+% First, it requires the Library of Congress Call Number (LCCN) to designate the newspaper. Once the pipeline takes the LCCN as a unique identifier for the newspaper, the pipeline queried the data on the date range that we specified. 
+% Of course, there is missing data in Chronicling America. 
+% If there is no available data (or issue) on a specific date, the pipeline passes the date and moves onto the next available date. 
+% Therefore, our data can be impacted by the comprehensiveness of Chronicling America as well as the publication frequency (e.g., daily or weekly).
+The cause of the Civil War is in part because of the dispute and disagreement of maintaining slavery institution. 
+The Fugitive Slave Act of 1850 empowered the Federal government to intervene in the legal issues that may arise when the slave escaped to the Free State. 
+% Of course, the conflict between Southern interests and Northern interests escalated prior to the endorsement of the Fugitive Slave Act. 
+On the surface, the Fugitive Slave Act represents a \textit{de jure} improvement in slave owners’ property rights \citep{lennon_slave_2016}. 
+However, the Fugitive Slave Act complicated the problem of slavery by creating a conflict of jurisdictions between the States  and the Federal government \citep{baumgartner_enforcing_2022}. 
+The election of Abraham Lincoln catalyzed the secession of the Southern States even though the Fugitive Slave Act compromised the Southern interest of maintaining \textit{status quo} of slavery and the Northern interest of the abolitionist movement. 
+In order to capture the period of the Fugitive Slave Act and the period of the Civil War, we collected data from January 1st, 1850 to December 31st, 1865.
+There are 3,803 digitized newspapers in Chronicling America\footnote{\url{https://chroniclingamerica.loc.gov/} searched on September 24th, 2022.}.
+Neither all of them are about abolitionist movement nor written in English, we chose 7 newspapers for our study using details in the newspaper biographies provided by Chronicling America.
+
+We wanted the newspapers to have (1) enough data to cover the date we want to study, (2) regional representativeness (both Southern and Northern newspapers), and (3) identified as abolitionist or anti-abolitionist newspapers, following the stance of editors.  
+% These three criteria were to ensure we have sufficient data to analyze and make sure to include newspapers covered stories about anti-abolitionist movement. 
+We included the two well-known abolitionist newspapers (\textit{Anti-slavery Bugle} and \textit{National Era}) in addition to one anti-slavery newspaper from New England (\textit{Green Mountain Freeman}) and four deep South newspapers (\textit{Abbeville Banner}, \textit{Daily Dispatch}, \textit{Edgefield Advertiser}, and \textit{Nashville Union and American}). 
+Arguably, Southern papers we included in the study were not designated for anti-abolition movement whereas \textit{Anti-Slavery Bugle} and \textit{National Era} advocated the abolitionist movement. 
+However, as Southern states saw abolition could lead to a financial crisis, editors were, in most cases, anti-abolitionists. 
+The detail of information of our newspapers is provided in Table \ref{tab:data} in the appendix.
+
+\subsection{Data preparation} \label{data preparation}
+19th century newspapers have multiple columns \citep{smith_computational_2015}.
+This made Chronicling America scan the entire page of the newspaper rather than splitting the text based on sections or articles. 
+This characteristic poses difficulties in processing the text. 
+Since our study focuses on specific words (i.e., ``slave'' and ``servant''),
+% and how they were used, 
+taking the entire page to build the embeddings for each word would incorporate unnecessary information into the model. 
+In addition, the poor quality of OCRed text provides a wrong position of where the sentence ends. Therefore, as a way of reduce the problems stated above, we read the OCR text by line and took where the word of interest appeared.
+
+Since our data does not include article breaks, we identified passages where our keywords (``slave'' or ``servant,'' respectively) appeared, and then defined a window of two lines before and after where the keyword appeared. 
+While this method does not perfectly align with article breaks, it does capture more of the context around our keywords without including the full text of the page, which might include significant amounts of text that is entirely irrelevant to the topics we are studying. 
+These snippets are the primary data studied using the methods outlined below. 
+Once we identified the index of the line where the word of interest appeared, we took the subset of the data with one line before and after to make a snippet. 
+This is to ensure we have enough contextual words around the word of interest at best. 
+
+\section{Methodology} \label{methodology}
+
+% This study comprises several steps to answer the research questions.
+% We start with Section \ref{fasttext cosine similarity} as a way of
+% reducing the impact of OCR errors. By running FastText Cosine similarity
+% on the words of interest, we can identify possible OCR error candidate texts.
+% The next section \ref{human annotation decision process} explains the detail procedure of including possible OCR error candidate texts into the analysis.
+% We included the human annotation process to make sure the words we include
+% are acceptable from human perspective, instead of rule-based computation.
+% While we expanded the size of data by including possible OCR error candidate texts, we reduced the size of data by excluding text reprints (see section \ref{text reprints deduplication}). 
+% The reason why we excluded text reprints is that we wanted to avoid overfitting the model we used to find semantically close words to the words of interest.
+% In section \ref{word2vec embedding} we explain how we used Word2vec embedding is appropriate for this study as it allows analyzing analogies.
+% % For instance, if we use pre-trained Word2vec model to query: 
+% % ``man'' is to ``king'' as ``woman'' is to ``?'', 
+% % then the closest word that can answer will be retrieved 
+% % and we expect the answer to be ``queen'' \citep{allen_analogies_2019}. 
+% Inspired by the capability of handling analogy \citep{allen_analogies_2019}, we subtracted the embeddings around the word ``slave'' from ``servant'' to surface the words that are semantically close to ``slave'' but not ``servant'' and vice versa. 
+% Finally, in section \ref{over-represented discourse words} we explain
+% how we identified over-represented discourse words in the Southern and Northern newspapers. 
+% This method helps us understand the systematic framing of ``slave'' and ``servant''
+% by comparing the proportion of the discourse words in the Southern and Northern newspapers.
+% Instead of counting frequencies of words found by the word embedding model,
+% we used log-odds ratio to include relative salience of the words in the newspapers. 
+% You may find the code for this study 
+% in the GitHub repository\footnote{\url{https://github.com//available-upon-acceptance}} upon the acceptance.
+
+\subsection{FastText cosine similarity} \label{fasttext cosine similarity}
+It is well-known that OCR produces wrong predictions when the scanned page is worn or damaged. OCR errors can bias the results \citep{chiron_impact_2017} and scholars are often uncertain whether the result is publishable \citep{traub_impact_2015}.
+The error introduced by OCR can impact the overall quality of research as well as the performance of the NLP model \citep{jiang_impact_2021}. 
+The more the OCR produced errors included in the text, the more the word tokens that the NLP model recognizes. 
+
+Especially when we use the Bag-of-Words (BoW) approach to conduct research, it is recommended to handle OCR errors due to the possibility of misrepresentation of actual word counts and OCRed word counts. 
+For example, even though humans can interpret ``slove'' as ``slave'' considering that ``slove'' might be OCR error, the BoW approach will take ``slove'' as a unique word and index it. 
+This will eventually expand the list of words and distort the real distribution of words in a given corpus.
+
+In order to reduce this negative influence of OCR errors, we used FastText embedding \citep{bojanowski_enriching_2017} to identify possible candidates for OCR errors. 
+Since FastText takes character-level n-grams instead of word-level embedding to build context-aware embeddings, it is tested effective that FastText can generate possible candidates for OCR errors \citep{hajiali_generating_2022}. 
+Therefore, we listed the most similar words based on Cosine distance metrics to the words of interest using FastText embedding. 
+Finally, human annotators coded whether the words listed as similar words could be considered as OCR errors. 
+
+\subsection{Human annotation decision process} \label{human annotation decision process}
+
+% \begin{algorithm}[h]
+%   \raggedright
+%   \caption{Human annotation process}\label{alg:human}
+%   \begin{algorithmic}[1]
+%   \STATE $dic$ $\leftarrow$ words in dictionary
+%   \STATE $sem$ $\leftarrow$ words semantically relevant
+%   \STATE $par$ $\leftarrow$ words with missing characters
+%   \STATE $fun$ $\leftarrow$ function words
+%   \STATE $gen$ $\leftarrow$ gender words
+%   \STATE $data$ $\leftarrow$ FastText Cosine similarity results
+%   \STATE $list$ $\leftarrow$ \{\}
+%   \FORALL{element $\in$ $data$}
+%     \IF{element $\in$ $dic$ \AND element $\notin$ $sem$}
+%       \STATE \textbf{continue}
+%     \ELSIF{element $\in$ $par$}
+%       \STATE \textbf{continue}
+%     \ELSIF{element $\notin$ $par$ \AND element $\in$ $fun$}
+%       \STATE $list$ $\leftarrow$ element
+%     \ELSIF{element $\notin$ $par$ \AND element $\in$ $gen$}
+%       \STATE $list$ $\leftarrow$ element
+%     \ENDIF
+%   \ENDFOR
+%   \STATE \textbf{return} $list$
+%   \end{algorithmic}
+% \end{algorithm}
+
+Two human annotators (One is from information science background and the other is from literary studies background) read samples of OCR errors and coded without any discussion. 
+We had binary categories, which were ```include'' if it can be considered as OCR error or ``exclude'' if it is not considered to be OCR error. 
+Our first round of intercoder reliability measure \citep{cohen_coefficient_1960}
+for ``slave'' and ``servant'' were substantial ($k$=0.73) and fair ($k$=0.39) agreement respectively \citep{viera_understanding_nodate}. 
+Two annotators discussed why disagreement arose. FastText returned ``slavery'' as a culture of practicing enslavement of Black and it was a mix of ``slavery'' OCR errors and ``slave'' OCR errors. 
+
+% Therefore, we set the rules to decide what to include and what to exclude and the logistics are provided in Algorithm \ref{alg:human}. 
+Two annotators conceptualized $dic$ as the words appeared in dictionaries, $sem$ as the words semantically relevant words (e.g., ``slavery'') and $par$  as the words with missing characters (e.g., ``slav'', ``serva''), $fun$ as the function words which does not have semantical information as well as the characters (e.g., ``of'', ``for'', ``t''), and $gen$ as gender words (e.g., ``man'', ``woman''). 
+The human annotating process started with reading through the FastText Cosine similarity results and if the word can be found in the dictionary and not relevant to the word of interest (e.g., ``hold'', ``buy''), we excluded the word. 
+In the next step, two annotators checked whether the word has partial characters of the word of interest (e.g., ``sla''), if this was the case, the word was excluded because the actual word of it could have been  other words in dictionaries (e.g., ``slate'', ``slam''). 
+
+In order to reduce false positives as many as possible and to make the logic of choosing OCR error candidates as less greedy as possible, the words with partial characters were excluded. 
+If the word from FastText entailed the extra characters on the tail (e.g., ``slaveto'', ``slavewith'') and they were the function words which does not convey information in terms of semantics, the annotators regarded it as OCR errors with tokenization and included in the OCR error candidates. Last but not least, annotators checked whether the words attached the gender-related words on the tail (e.g., ``slaveman'', ``servantwoman'') and if this was the case, we included as one of the possible OCR error candidates. 
+
+The average Levenshtein distance \citep{levenshtein_binary_1966} of the OCR error candidates for ``servant'' is 80.48 while ``slave'' is 75.89. 
+The standard deviation for ``servant'' is 8.81 when ``slave'' is 9.92. 
+With these OCR candidates, we added the snippet of OCR candidates and the final size of dataset for this study is presented in Table \ref{tab:data}. 
+Overall, the size of snippets after including OCR error candidates increased 5,765 for servant data (1.15\%) and 14,241 for slave data (1.07\%).    
+
+\subsection{Text reprints deduplication} \label{text reprints deduplication}
+19th century American newspapers reprinted texts from a wide range of genres: news reports, recipes, trivia, lists, vignettes, and religious reflections \citep{cordell__2017}. 
+Text reprints could also include boilerplate that appeared across many issues of the same paper, such as advertisements. 
+
+A business might buy advertisement space for multiple weeks, months, or even years, and those ads would be left in standing type from issue to issue. 
+In a study such as this one, focused on textual reuse, an ad that includes a keyword of interest but which appears day after day can disproportionately influence the statistical relationship between words in the corpus, leading our model to overestimate the importance of words within the ad relative to the words in texts that changed each day. In other words, if one particular phrase repeatedly appears, then the embedding model will overfit the phrase because of the distorted distribution of the text. However, it is hard to detect reprints based on keyword searches because of OCR errors. 
+
+Here we adopt the text-reuse detection methods, as described in \citet{smith_detecting_2014} , which use n-gram document representations to detect text reprints within errorful OCR-derived text. 
+We processed our corpus with a 5-gram chunking using NLTK whitespace tokenizer and further made a judgment that the text has been reprinted when there were more than three matches of 5-grams across the snippets. 
+For deduplication, we kept only the first snippet among multiple reprints. 
+
+For instance, the advertisement about selling a servant with the detailed condition appeared in \textit{Daily Dispatch} on January 9th, 1856; 
+(e.g., ``child'', ``4'', ``12'', ``year'', ``age'', ``ser'', ``vant'', ``half'', ``price'', ``servant'', ``travel'', ``bv'', ``must'', ``furnish'', ``two'', ``pass'', ``one'', ``may'') 
+was detected to have reprints in May 20th, 1856 
+(e.g., ``child'', ``4'', ``12'', ``year'', ``age'', ``ser'', ``vant'', ``half'', ``price'', ``servant'', ``travel'', ``must'', ``famish'', ``two'', ``pass'', ``one'', ``may''). 
+In this example, this pair is not identical because of inconsistent OCR like ``furnish'' and ``famish'', however, the 5-gram matching examination substantiated that this pair denotes a reprinted text. 
+Due to the effectiveness of the method by \citet{smith_detecting_2014}, we used the method of n-gram document representations to prepare the final data for a Word2vec model. 
+After the deduplication process, the size of the snippets decreased by 13,533 in servant data (0.68\%) and 23,089 data in slave data (0.88\%). 
+The final size used for the analysis is provided in Table \ref{tab:data}.
+
+\subsection{Word2vec embedding} \label{word2vec embedding}
+Once we garnered snippets of the text where ``slave'' and ``servant'' including possible OCR error candidates and excluding text reprints, we trained Word2vec model \citep{mikolov_distributed_2013} to leverage CBOW (Continuous Bags of Words) and Skip-gram model.
+% Both CBOW and Skip-gram models find word representations by taking the surrounding words into a consideration. 
+% While CBOW models the words before and after of the word of interest, Skip-gram takes the word of interest to predict surrounding words. 
+% Word2vec embedding is widely used by digital humanities scholars to computationally extract the semantics of the given word. 
+% Especially with longitudinal observation for semantic changes of the word of interest, Word2vec model is of popular embedding model that digital humanities scholars chose to use \citep{hengchen_data-driven_2021, soni2021abolitionist,blanke_understanding_2020}.
+As an initial step for preparing the training snippets, we used the standard stopwords list from NLTK\footnote{\url{https://www.nltk.org/}}.
+Once we got rid of the words from stopwords list, we then made the word lower case and then we lemmatized the words by relying on \textit{en\_core\_web\_sm} model from SpaCy\footnote{\url{https://spacy.io/models}}.
+To make sure that the embedding model does not overfit miscellaneous OCR errors, we had the embedding model train only the words that appeared more than 10 times in the entire snippets.
+
+\subsection{Statistically over-represented discourse words} \label{over-represented discourse words}
+We operationalized the discourse words as the words that are the words close to ``slave'' and ``servant'' from Word2vec embedding (sec \ref{word2vec embedding}).
+In order to answer RQ2, where we address how the words close to ``slave'' and ``servant'' prevalent in the entire corpora of newspapers, we calculated log-odds ratio with informative Dirichlet as defined in equation \ref{eq: log-odds ratio} \citep{monroe2008fightin}.
+
+\begin{equation}
+\begin{aligned}
+  \delta_{w}^{(i-j)} = \log \frac{y_{w}^{i}+a_{w}}{n^{i}+a_{0}-y_{w}^{i}-a_{w}} \\
+  - \log \frac{y_{w}^{j}+a_{w}}{n^{j}+a_{0}-y_{w}^{j}-a_{w}}
+\end{aligned}
+\label{eq: log-odds ratio}
+\end{equation}
+
+The log-odds ratio with informative Dirichlet of each word $w$ between two corpora $i$ and $j$ (in our study, newspapers from North and South) given the prior frequencies are obtained from the entire corpus $a$. When $n^{i}$ is the total number of words in corpus $i$, $y_{w}^{i}$ is the number of times word $w$ appears in corpus $i$,$a_{0}$ is the size of the corpus $a$, and
+$a_{w}$ is the frequency of word $w$ in corpus $a$ \citep{kwak2020systematic}.
+With the log-odds ratio, we can identify the words that are over-represented 
+in the corpora \citep{park2023quantitative, park2024you}.
+
+\section{Findings} \label{Findings}
+
+% We present words based on Cosine similarity rank after subtracting 
+% the vector space around ``servant'' from the vector space 
+% around ``slave'' in Table \ref{tab:my-result-slave}
+% and ``slave'' from `servant' in Table \ref{tab:my-result-servant}. 
+% However, we would like to point out that the words considered likely 
+% to be an OCR error are not presented in the table for the sake of 
+% saving some space for more informative words. 
+% To answer our research questions, we compared how the similar words from
+% Table \ref{tab:my-result-slave} and Table \ref{tab:my-result-servant} 
+% are different within the same newspaper (RQ1-1) 
+% and compared how the similar words are different in
+% Table \ref{tab:my-result-slave} and Table \ref{tab:my-result-servant} 
+% respectively (RQ 1-2).
+
+\subsection{RQ1: What are the words that are similar words?} \label{findings:rq1}
+In general, we found that discourse around slave (Table \ref{tab:my-result-slave}) is centered around socio-economic, legal, and administrative words, regardless of the source newspaper's stance toward slavery.
+By contrast, discourse around servant (Table \ref{tab:my-result-servant}) from pro-slavery stance newspapers is more related to domestic work whereas discourse around servant from anti-slavery stance newspapers is mostly comprised by religious words.
+
+Socio-economic, legal, and administrative words are prevalent in slave discourse compared to servant discourse.
+For instance, ``congress'' (from \textit{Edgefield Advertiser} and \textit{Green Mountain Freeman}), ``constitution'' (from \textit{Edgefield Advertiser} and \textit{Green Mountain Freeman}), ``legislate'' (from \textit{Edgefield Advertise} and \textit{Green Mountain Freeman}), ``nation'' (from \textit{Abbeville Banner}), and ``commonwealth'' (from \textit{Daily Dispatch}) can be considered words with legal and administrative implications.
+
+Words such as ``attempt,'' ``death,'' ``punishment,'' ``violation,'' and ``crime,'' might be pertinent to the frame that pro-slavery newspaper had tried to scheme.
+Similarly, we can also observe ``fugitive'' from Edgefield Advertiser.
+However, \textit{Daily Dispatch} contains more words implying negative or violent actions from slaves than any other newspapers.
+
+We also able to observe that economic words like ``profit'' (From \textit{Abbeville Banner}) and ``labor'' (From \textit{Abbeville Banner} and \textit{Nashville Union and American}).
+In addition, the words around how to rebuild the nation after the Civil War is also captured in \textit{Anti-slavery Bugle} (``restoration'')
+
+Contrary to slave discourse, which was largely unanimous across pro-slavery and anti-slavery newspapers, servant discourse was starkly divided by the newspapers' stance toward slavery.
+
+While pro-slavery newspapers from the South showed more words around domesticity, anti-slavery newspapers showed more religiously-inflected words.
+We can find words like ``table,'' ``ice,'' ``furniture,'' ``garden,'' ``ladle,'' and ``dress'' closely aligned with "servernt" in the \textit{Daily Dispatch}, ``seat,'' ``cook,'' and ``house,'' in the \textit{Edgefield Advertiser}, ``linen,'' ``bed,'' ``shirt,'' ``dress,'' ``cook,'' ``flannel,'' ``apron,''  ``cottonade,'' and ``blanket'' in the \textit{Nashville Union and American}, all pro-slavery newspapers. 
+
+In addition, we observed that the words associated with a good demeanor that conforms to white supremacist societal hierarchies appeared regardless of the papers' stance toward slavery.
+For instance, ``respectfully'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}) ``obedient'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}), ``humble'' (from \textit{National Era}).
+
+However, religiously laden words are unique to anti-slavery newspapers. The words like ``bible,'' ``jesus,'' (from \textit{Anti-slavery Bugle}) ``god'' (from \textit{Green Mountain Freeman} and \textit{National Era}), ``christ,'' (\textit{Anti-slavery Bugle} and \textit{National Era}), ``faithful'' (\textit{National Era}) can be religious words.
+
+In summary, we find that discourse around the word ``slave'' is more focused on macroscopic concepts including socio-economic, legal, and administrative words compared to servant discourse (RQ1-1). 
+Although we cannot find a stark contrast between slave discourse in pro-slavery newspapers and anti-slavery newspapers, we observe that there is a difference between pro-slavery newspapers (religious accounts) and anti-slavery newspapers (domestic work words) in servant discourse (RQ1-2).
+
+\subsection{RQ2: How prevalent are the discourse words?} \label{findings:rq2}
+With the findings in section \ref{findings:rq1}, we explored how prevalent the discourse words are in the corpus. 
+If the datapoint is above 0 in the Y-axis, it means that the word is over-represented in the Northern newspapers and if the datapoint is below 0 in the Y-axis, it means that the word is over-represented in the Southern newspapers. 
+
+In figure \ref{fig:slave-discourse}, we can observe that 45 slave discourse words from the South are over-represented in the Northern newspapers (0.7142\% of the South slave discourse words) while only 7 slave discourse words from the North are over-represented in the Southern newspapers (0.1627\% of the North slave discourse words). 
+
+This indicates that the slave discourse words are more used in the Northern newspapers than the Southern newspapers. The words like ``law'' (Z=16.7714), ``trade'' (Z=12.0071), ``nation'' (Z=11.9236) are the top over-represented slave Southern discourse words in the Northern newspapers. 
+On the other hand, ``pro'' (Z=$-$0.84507), ``owner'' (Z=$-$7.1651), ``death'' (Z=$-$4.8179) are the top over-represented slave Southern discourse words in the Southern newspapers. 
+
+This finding is in part explainable by the findings from the RQ 1 where we found that slave discourse is more focused on macroscopic concepts including socio-economic, legal, and administrative words. 
+Since these words were also used in describing the slave in Northern newspapers, we can observe that the words from the South are also frequently used in the Northern newspapers. 
+
+However, as we found in RQ 1, the servant discourse words showed contrast between the Northern and Southern newspapers. 
+This is also reflected in the word usage in the Northern and Southern newspapers. 
+From figure \ref{fig:servant-discourse}, we can observe that the majority of the servant discourse words from the South and the servant discourse words from the North are over-represented in the newspapers they are from. 
+
+29 servant discourse words from the South are frequently used in the Southern newspapers (0.5576\% of the Southern servant discourse words). 
+Similarly, 31 servant discourse words from the North are freqeucntly used in the Northern newspapers (0.8611\% of the Northern servant discourse words).
+The words related to religion such as ``faithful'' (Z=8.5067), ``christ'' (Z=5.2329), ``church'' (Z=0.6994) are more frequently used in the Northern newspapers than the Southern newspapers. The words characterized by domestic work such as ``apron'' (Z=$-$1.6263), ``shirt'' (Z=$-$2.2580), ``linen'' (Z=$-$3.4279), and ``cook'' (Z=$-$7.1075) are more frequently used in the Southern newspapers than the Northern newspapers.
+
+
+\section{Discussion} \label{discussions}
+For Southern editors and readers, slaves were property which could be taken away through political action and this concern was well-reflected in the \textit{Abbeville Banner}. 
+Indeed, the Southern economic system cannot be explained without institutionalized slavery \citep{meyer_economics_2017}. 
+For them, slave labor undergirded and sustained the Southern economy. 
+Because the role of slave is deeply connected to economy and society, discourse around slave in 19th century newspapers, at least during the period of our data, is mostly centered around law and government. 
+Unfortunately, slave discourse from newspapers does not show how subjugated life of slave actually was. Even for anti-slavery stance newspapers does not frame slavery matter with empathy-provoking words to speak more audiences. 
+% For anti-slavery stance newspapers, there seems no space for afflicted life of slaves to achieve victory in the crusade for value and moral war against the wrong. 
+
+We also found that the slave discourse words from the South are over-represented in Northern newspapers.
+We hypothesize that this is because the slave discourse words are based on the political, legal, and economic situations of the United States. Since the slave discourse words from the Northern newspapers are also talking about slaves in the similar fashion, the words from the South are also frequently used in the Northern newspapers.
+
+Contrary to iron-hearted accounts for slaves, servant discourse contains words for family, and every-day life of servants. 
+In addition to domestic work of the duty of servants, words related to family can be emotional. 
+Taking this together, the sentence combined with ``respectfully'', ``obedient'', servants ``cook''ing for a hot soup is sufficient enough to imagine warm hospitality and thus evoke nostalgic imagination of South \citep{mcpherson_reconstructing_2003}. 
+
+By demonstrating that discourse around ``servant'' in Southern newspapers euphemized and idealized the depiction of slavery, our findings can supplement the work of \citet{glazer_carry_1996} which studied nostalgia for an idyllic antebellum South in 19th century popular culture.
+Even though \textit{Gone with the Wind}, published in 1936, is attributed to the claim of re-construction of nostalgic South, we observed the emergence of early prototype of creating nostalgic South by associating ``servants'' with sentimental and patronizing words. 
+
+We find that Southern newspapers were far more likely to use words that created a sentimental or nostalgic image of the South and the slave system.
+Servant discourse words from the South are not frequently used in the Northern newspapers. This uniqueness can explain how the word ``servant'' is used euphemistically to describe domestic slaves in the South, downplaying their forced servitude by using a more neutral, domestic words. 
+Though on the surface, ``servant'' might seem like a more benign and positive word than ``slave'', the patterns of word usage in the newspapers suggest how Southern newspapers language worked rhetorically to stereotype Black Americans and sanitize the brutal system of oppression and subjugation.
+
+% used to describe servants in the South may seem more benign, they are still part of a larger system of oppression and subjugation.
+
+% Our finding can supplement the work of \citet{glazer_carry_1996} which studied permeated nostalgia for an idyllic antebellum South in 19th century popular culture by demonstrating that discourse around servant from South newspaper indeed played a role in forming warm hospitality of slavery. 
+% \citet{key1995sound} also noticed that the musician, Stephen Foster, who lived during antebellum period also used nostalgic lyrics even before the institution of slavery was entirely eradicated. 
+% Even though \textit{Gone with the Wind}, published in 1936, is attributed to the claim of re-construction of nostalgic South, we observed the emergence of early prototype of creating nostalgic South by associating ``servants'' with sentimental and patronizing words. 
+% This pattern of using words to create nostalgic image of the South was only observed in the Southern newspapers.
+% Unlike the slave discourse, the servant discourse words from the South are not frequently used in the Northern newspapers.
+% This uniqueness of the servant discourse words from the South can explain how the word ``servant'' is euphemistically used to describe the domestic slaves in the South.
+
+% We further claim that the nostalgic and patronizing sentiment from both newspapers and songs are the images and perceptions from white who owned the Black back then, thus sentimental version of the way servants are being discussed is one way of stereotyping by Southern newspapers.
+% Christian ground in anti-slavery newspapers can connect to the concept of Black chosenness. 
+% Black religious leaders often drew the familiar parallel between Black and Israelites and proclaimed the United States is the chosen nation to a path way to Black liberation \citep{fagan2016black}. 
+Abolitionist newspapers relied on evangelical rhetoric to discuss servants compared to slaves. Though biblical justifications were often used to defend slavery (i.e., Genesis 9:18-27; Ephesians 6:5-7), the abolitionist movement also drew hevily on religious conviction and language in articulating the case for emancipation \citep{rae_great_2018}.
+
+% We identified that anti-slavery newspapers relied on evangelical rhetoric to discuss servants compared to slaves. Religious explanation was unique characteristic of anti-slavery stance newspapers even though biblical ground could also be used to defend slavery (i.e., Genesis 9:18-27; Ephesians 6:5-7) \citep{rae_great_2018}. 
+% To support slavery with the aforementioned biblical ground, Virginia declared that a person could be both Christian and enslaved in 1667, thereby discouraging slaves from converting solely to gain freedom \citep{russell_color_1993}. 
+It resonates the historical context that the emphasis on Bible has led North to include the feminist and temperance movements by marring the integrity of Biblical authority while helped South to revive religious spirit \citep{lloyd_slavery_1939}. 
+% However, at least in the time period of data or newspapers that we included in this study do not show that pro-slavery accounts relying on Christian ground to justify slavery from South.  
+
+In Imagined Communities, \citet{anderson2006imagined} said ``... the very conception of the newspaper implies the refraction of even `world events' into a specific imagined world of vernacular readers.'' In other words, newspapers are not only a reflection of the society but also a tool to shape the society. The interplay between the newspapers creating the nostalgic image of the South and the society that consumed the newspapers led to a reinforcement of the sentimental and idealized portrayal of slavery. This cyclical relationship between media and society calls for a more research on how the past was 
+shaped by the media and how it influenced the public perception of slavery.
+
+This study adds to the scholarship on digital humanities by providing a computational approach to understanding how 19th century newspapers framed the discourse around "slave" and "servant." By leveraging word embeddings and statistical analysis, we were able to uncover the nuanced differences in how these terms were used in pro-slavery and anti-slavery newspapers. Our findings highlight the role of language in shaping public perception and the importance of critically examining historical texts to understand the socio-political context of the time.
+
+% In conclusion, this research not only sheds light on the rhetorical strategies employed by 19th century newspapers but also provides a framework for future studies to investigate the interplay between media, language, and society. By making our code and data publicly available, we encourage other researchers to build upon our work and continue to explore the rich and complex history of slavery and servitude in the United States.
+
+% reading a newspaper is like reading a novel whose author has abandoned any thought of a coherent plot.'' (p.33) \citet{fagan2016chronicling} extends this argument to explain why there has been a lack of attention paid to Black newspapers by current scholarship 
+% and argued mapping Black newspapers and culture is challenging. 
+% To our knowledge, this study is the first research using (1) a computational method to draw a comparison between (2) how slaves and servants are covered in abolitionist newspapers and Southern anti-abolitionist newspapers. 
+% We hope our finding substantiates that there existed divided Black communities where servants were described with domestic work words compared to slaves in pro-slavery newspapers. 
+
+% \section{Conclusion} \label{conclusion}
+% The rise of computational methods and its easy application \citep{park2022raison,park2023ripple} as well as 
+% digital archives \citep{dobreski2019remodeling} has opened up new possibilities
+% for historians to explore the past with quantitative approaches. However,
+% to the best of our knowledge, there has been a small number of studies
+% on quantitative analysis of how newspapers in the South and North
+% used words to describe enslaved people.
+% Throughout the paper, we demonstrated how the coverage of slaves and servants varied depending on the newspapers. 
+% The contribution of this paper is two-fold. (1) We contribute to fill the gap between 
+% fast-growing field of applying computational methods 
+% in digital humanities and lack of attention in analyzing abolitionist (anti-slavery) 
+% and pro-slavery newspapers. 
+% (2) The methodological contribution of this paper connects to dealing with abundant OCR-errored text 
+% for digital humanities scholars. 
+% By close reading the FastText results, which is best-known to capture OCR error candidates, 
+% we first expanded the size of data to include possible OCR errors for the words of interest (slave and servant). 
+% For the next step, we will delve into how the discourse around slave and servant are different in the newspapers 
+% run by Black editors.
+
+
+% \section{Limitations} \label{limitations}
+% We want to point out that the corpora we examined in this study can be considered far from actual representation of newspapers from both North and South due to insufficient digitization of historical newspaper \citep{beelen_bias_2023}. 
+% Due to the lack of digitization, we could not trace the evolution of the discourse around slave and servant \citep{griebel2024locating}.
+% Especially Chronicling America had faced criticism of lack of digitization of Black newspapers by mostly 
+% incorporating white newspapers \citep{fagan2016chronicling}. 
+% Therefore, we need to be cautious in interpreting the findings of this study 
+% due to the implicit bias that had been incorporated 
+% without our conscious and control \citep{zaagsma_digital_2023}. 
+% This limitation can speak to all historians who want to use computational method 
+% toward digitized historical newspapers \citep{allen2010historians}.
+
+\bibliography{custom}
+
+\appendix
+
+\section{Appendix} \label{sec:appendix A}
+
+\begin{table*}[]
+\Large
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|ccccc|}
+\hline
+\multirow{2}{*}{Stance} & \multirow{2}{*}{Title} & \multicolumn{1}{c|}{\multirow{2}{*}{LCCN}} & \multicolumn{1}{c|}{\multirow{2}{*}{Frequency}} & \multicolumn{1}{c|}{\multirow{2}{*}{Geographic location}} & \multicolumn{2}{c|}{Snippet size} \\ \cline{6-7} 
+ &  & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{} & \multicolumn{1}{c|}{Servant} & Slave \\ \hline
+\multirow{8}{*}{Pro-slavery newspaper} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Abbeville Banner\\ (1850-1860)\end{tabular}} & \multicolumn{1}{c|}{sn85026945} & \multicolumn{1}{c|}{Weekly} & \multicolumn{1}{c|}{Abbeville, SC} & \multicolumn{1}{c|}{n=314} & n=2,488 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}Like other white Democrat newspapers of the era,\\  the Press and Banner steered a conservative course, celebrating \\ the return of the ``Bourbons,'' or antebellum-era aristocrats, \\ to political power in 1877 and championing the interests of agrarian elites.\end{tabular}} \\ \cline{2-7} 
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Daily Dispatch\\ (1852-1865)\end{tabular}} & \multicolumn{1}{c|}{sn84024738} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Daily\\ (Except Sundays)\end{tabular}} & \multicolumn{1}{c|}{Richmond, VA} & \multicolumn{1}{c|}{n=17,390} & n=24,975 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}Though the Daily Dispatch started as nonpartisan, Cowardin, a staunch southern Whig, \\ increasingly included conservative and pro-slavery editorials \\ while advocating the development of local industry \\ as a path to independence at a time of growing sectional tension.\end{tabular}} \\ \cline{2-7} 
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Edgefield Advertiser\\ (1850-1862)\end{tabular}} & \multicolumn{1}{c|}{sn84026897} & \multicolumn{1}{c|}{Weekly} & \multicolumn{1}{c|}{Edgefield, SC} & \multicolumn{1}{c|}{n=1,125} & n=11,939 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}Its editors have at times vigorously defended some of the most divisive issues \\ in this nation's history -- nullification, secession, segregation, slavery, and states' rights.\end{tabular}} \\ \cline{2-7} 
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Nashville Union and American\\ (1853-1862)\end{tabular}} & \multicolumn{1}{c|}{sn85038518} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Daily\\ (Except Mondays)\end{tabular}} & \multicolumn{1}{c|}{Nashville, Davidson, TN} & \multicolumn{1}{c|}{n=6,385} & n=21,721 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}In the merger announcement on May 17, 1853, \\ the Nashville American assured readers that \\ ``it will be the constant aim of the consolidated journal \\ to preserve the democratic party of Tennessee\\  a unit for all the great purposes of its organization.''\end{tabular}} \\ \hline
+\multirow{6}{*}{Anti-slavery newspaper} & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Anti-slavery Bugle\\ (1850-1861)\end{tabular}} & \multicolumn{1}{c|}{sn83035487} & \multicolumn{1}{c|}{Weekly} & \multicolumn{1}{c|}{New-Lisbon, OH} & \multicolumn{1}{c|}{n=1,251} & n=69,877 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}Marius R. Robin served as editor of the paper for over seven years\\ during the 1850s and was extremely active \\ in the Anti-Slavery Society, once serving as its president.\end{tabular}} \\ \cline{2-7} 
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}Green Mountain Freeman\\ (1850-1865)\end{tabular}} & \multicolumn{1}{c|}{sn84023209} & \multicolumn{1}{c|}{Weekly} & \multicolumn{1}{c|}{Montpelier, Washington, VT} & \multicolumn{1}{c|}{n=1,097} & n=13,046 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}From November 1842 to 1843, the Vermont Freeman, published first by antislavery agent \\ and lecturer Alanson St. Clair and then by Joseph E. Hood, with editorial assistance \\ from Chester C. Briggs, was issued from Montpelier and Norwich.\end{tabular}} \\ \cline{2-7} 
+ & \multirow{2}{*}{\begin{tabular}[c]{@{}c@{}}National Era\\ (1850-1860)\end{tabular}} & \multicolumn{1}{c|}{sn84026752} & \multicolumn{1}{c|}{Weekly} & \multicolumn{1}{c|}{Washington, DC} & \multicolumn{1}{c|}{n=1,987} & n=37,918 \\ \cline{3-7} 
+ &  & \multicolumn{5}{c|}{\begin{tabular}[c]{@{}c@{}}The National Era was an important publisher of abolitionist exists, \\ most notably the serialization of Uncle Tom's Cabin in 1851. \\ Its editor, John Greeleaf Whittier, was a Quaker abolitionist and poet \\ who staunchly advocated for emancipation throughout his time with the Paper.\end{tabular}} \\ \hline
+\end{tabular}%
+}
+\caption{Dataset description.}
+\label{tab:data}
+\end{table*}
+
+\begin{figure*}[htb]%[H]
+  \centering
+  \includegraphics[width=1\textwidth]{figure/slave-discourse.pdf}
+    \caption{The datapoints represent the slave discourse words. The slave discourse words from the South is represented with red cross, the slave discourse words from the North is represented with blue circle, and the slave discourse words that appeared in both Southern and Northern newspapers are in square diamond with green color. X-axis shows the frequency of the words in the entire corpus
+    and Y-axis shows the Z-score of the words in the corpus.
+    }~\label{fig:slave-discourse}
+    \vspace{-4mm}
+  \end{figure*}
+
+  \begin{figure*}[htb]%[H]
+    \centering
+    \includegraphics[width=1\textwidth]{figure/servant-discourse.pdf}
+    \caption{The datapoints represent the servant discourse words. The servant discourse words from the South is represented with red cross, the slervant discourse words from the North is represented with blue circle, and the servant discourse words that appeared in both Southern and Northern newspapers are in square diamond with green color. X-axis shows the frequency of the words in the entire corpus
+    and Y-axis shows the Z-score of the words in the corpus.
+    }~\label{fig:servant-discourse}
+    \vspace{-4mm}
+  \end{figure*}
+
+\begin{table*}[]
+  \resizebox{\textwidth}{!}{%
+  \begin{tabular}{|c|cccc|ccc|}
+  \hline
+   & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Abbeville\\ Banner\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Daily\\ Dispatch\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Edgefield\\ Advertiser\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Nashville \\ Union and\\ American\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Anti-slavery\\ Bugle\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Green\\ Mountain\\ Freeman\end{tabular}} & \begin{tabular}[c]{@{}c@{}}National\\ Era\end{tabular} \\ \hline
+   & \multicolumn{4}{c|}{Pro-slavery stance newspapers} & \multicolumn{3}{c|}{Anti-slavery stance newspapers} \\ \hline
+  1 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}person\\ (0.017)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}carry\\ (0.3936)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}repeal\\ (0.5490)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}immediate\\ (0.3877)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}restoration\\ (0.3788)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}territory\\ (0.5851)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}gulf\\ (0.4330)\end{tabular} \\ \hline
+  2 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}back\\ (0.013)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}attempt\\ (0.3670)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}territory\\ (0.5415)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}claim\\ (0.3618)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}entire\\ (0.3591)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}admission\\ (0.5846)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}oppose\\ (0.4169)\end{tabular} \\ \hline
+  3 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}color\\ (0.010)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}death\\ (0.3560)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}law\\ (0.5278)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}would\\ (0.3567)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}acquisition\\ (0.3506)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}admit\\ (0.5780)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}favor\\ (0.4017)\end{tabular} \\ \hline
+  4 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}population\\ (0.009)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}punishment\\ (0.3506)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prohibit\\ (0.5043)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}favor\\ (0.3567)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}demand\\ (0.3329)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}constitution\\ (0.5735)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}interested\\ (0.3940)\end{tabular} \\ \hline
+  5 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}profit\\ (0.009)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}violation\\ (0.3481)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}exclude\\ (0.4961)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}texas\\ (0.3475)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}native\\ (0.3319)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prohibit\\ (0.5644)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}virginia\\ (0.3940)\end{tabular} \\ \hline
+  6 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}say\\ (0.009)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}crime\\ (0.3416)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}right\\ (0.4944)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}maryland\\ (0.3469)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}unconditional\\ (0.3262)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}missouri\\ (0.5354)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}immigration\\ (0.3928)\end{tabular} \\ \hline
+  7 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}upon\\ (0.008)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}allege\\ (0.3406)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}trade\\ (0.4796)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}proposition\\ (0.3459)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}enable\\ (0.3252)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}exclude\\ (0.5142)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}transfer\\ (0.3902)\end{tabular} \\ \hline
+  8 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}land\\ (0.008)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}protect\\ (0.3375)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}north\\ (0.4767)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}pro\\ (0.3308)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}stipulation\\ (0.3228)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}legislate\\ (0.5141)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}derive\\ (0.3901)\end{tabular} \\ \hline
+  9 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}six\\ (0.007)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}admit\\ (0.3284)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}fugitive\\ (0.4734)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}senator\\ (0.3306)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}coastwise\\ (0.3217)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}united\\ (0.4983)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}similar\\ (0.3845)\end{tabular} \\ \hline
+  10 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}labor\\ (0.007)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}suppose\\ (0.3264)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}union\\ (0.4569)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}justice\\ (0.3303)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}throughout\\ (0.3207)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}establish\\ (0.4972)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}emigration\\ (0.3792)\end{tabular} \\ \hline
+  11 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}nation\\ (0.007)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}district\\ (0.3218)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}abolition\\ (0.4432)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}louisiana\\ (0.3296)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}annex\\ (0.3190)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}limit\\ (0.4958)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}impossible\\ (0.3702)\end{tabular} \\ \hline
+  12 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}well\\ (0.007)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}commonwealth\\ (0.3167)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}legislate\\ (0.4321)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}piracy\\ (0.3251)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}internal\\ (0.3187)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}state\\ (0.4944)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}annex\\ (0.3675)\end{tabular} \\ \hline
+  13 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}million\\ (0.006)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}matter\\ (0.3158)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}constitution\\ (0.4280)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}beyond\\ (0.3233)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}obtain\\ (0.3173)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}district\\ (0.4903)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}prevent\\ (0.3654)\end{tabular} \\ \hline
+  14 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}year\\ (0.006)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}decision\\ (0.3145)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}revive\\ (0.4259)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}attempt\\ (0.3203)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}restore\\ (0.3142)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}existence\\ (0.4876)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}tennessee\\ (0.3585)\end{tabular} \\ \hline
+  15 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cause\\ (0.006)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}marshal\\ (0.3143)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}exist\\ (0.4254)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}effect\\ (0.3197)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}uni\\ (0.3136)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}exist\\ (0.4860)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}gain\\ (0.3549)\end{tabular} \\ \hline
+  16 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}owner\\ (0.005)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}concern\\ (0.3141)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}reopen\\ (0.4092)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}demand\\ (0.3195)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}suppression\\ (0.3105)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}congress\\ (0.4761)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}include\\ (0.3541)\end{tabular} \\ \hline
+  17 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}african\\ (0.005)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}pro\\ (0.3140)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}african\\ (0.4083)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}especially\\ (0.3190)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}acquiesce\\ (0.3105)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}free\\ (0.4755)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}total\\ (0.3539)\end{tabular} \\ \hline
+  18 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}foreign\\ (0.005)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prevent\\ (0.3131)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}congress\\ (0.4041)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}labor\\ (0.3188)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}piratical\\ (0.3064)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prohibition\\ (0.4761)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}demand\\ (0.3538)\end{tabular} \\ \hline
+  19 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}answer\\ (0.004)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}account\\ (0.3123)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}foreign\\ (0.4036)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}intend\\ (0.3176)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}supremacy\\ (0.3058)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}within\\ (0.4691)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}interdict\\ (0.3505)\end{tabular} \\ \hline
+  20 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}also\\ (0.004)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}resist\\ (0.3114)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}carry\\ (0.3984)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}states\\ (0.3175)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}defiance\\ (0.3049)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}introduction\\ (0.4657)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}encourage\\ (0.3489)\end{tabular} \\ \hline
+  \end{tabular}%
+  }
+  \caption{The cosine similarity ranking after deducting ``servant'' from ``slave''}
+  \label{tab:my-result-slave}
+  \end{table*}
+
+  \begin{table*}[]
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|cccc|ccc|}
+    \hline
+     & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Abbeville\\ Banner\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Daily\\ Dispatch\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Edgefield\\ Advertiser\end{tabular}} & \begin{tabular}[c]{@{}c@{}}Nashville \\ Union and\\ American\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Anti-slavery\\ Bugle\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}Green\\ Mountain\\ Freeman\end{tabular}} & \begin{tabular}[c]{@{}c@{}}National\\ Era\end{tabular} \\ \hline
+     & \multicolumn{4}{c|}{Pro-slavery stance newspapers} & \multicolumn{3}{c|}{Anti-slavery stance newspapers} \\ \hline
+    1 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}vote\\ (0.023)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}table\\ (0.3568)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}respectfully\\ (0.4777)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}linen\\ (0.2942)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}thy\\ (0.1893)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}child\\ (0.3562)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}obedient\\ (0.3312)\end{tabular} \\ \hline
+    2 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}party\\ (0.022)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}moat\\ (0.3532)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}obedient\\ (0.4628)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}good\\ (0.2801)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}lecture\\ (0.1885)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}see\\ (0.3460)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}thy\\ (0.2840)\end{tabular} \\ \hline
+    3 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}proslavery\\ (0.021)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}gentleman\\ (0.3528)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}friend\\ (0.4609)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}bed\\ (0.2740)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}wife\\ (0.1741)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}old\\ (0.3344)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}respectfully\\ (0.2479)\end{tabular} \\ \hline
+    4 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}whole\\ (0.021)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}ice\\ (0.3412)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}seat\\ (0.4422)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}sound\\ (0.2583)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}master\\ (0.1712)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}thy\\ (0.3089)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}god\\ (0.2214)\end{tabular} \\ \hline
+    5 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}liberal\\ (0.0207)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}furniture\\ (0.3384)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}john\\ (0.4367)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}shirt\\ (0.2583)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}jesus\\ (0.1674)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}girl\\ (0.2928)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}brother\\ (0.2178)\end{tabular} \\ \hline
+    6 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}allegiance\\ (0.018)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}dry\\ (0.3369)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}announce\\ (0.4275)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}dress\\ (0.2560)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}unto\\ (0.1667)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}obedient\\ (0.2884)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}honor\\ (0.2071)\end{tabular} \\ \hline
+    7 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}commit\\ (0.017)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}superior\\ (0.3216)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}candidate\\ (0.4056)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}cook\\ (0.2517)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}song\\ (0.1578)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}brother\\ (0.2802)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}christ\\ (0.2062)\end{tabular} \\ \hline
+    8 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}slavery\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}good\\ (0.3204)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}george\\ (0.4011)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}excellent\\ (0.2514)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}mind\\ (0.1541)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}day\\ (0.2739)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}humble\\ (0.1831)\end{tabular} \\ \hline
+    9 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}servile\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}price\\ (0.3196)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}ensue\\ (0.3895)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}train\\ (0.2507)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}doctor\\ (0.1406)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}mother\\ (0.2654)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}bible\\ (0.1827)\end{tabular} \\ \hline
+    10 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}last\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}rood\\ (0.3154)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cook\\ (0.3749)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}mill\\ (0.2467)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}mother\\ (0.1385)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}respectfully\\ (0.2651)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}thou\\ (0.1773)\end{tabular} \\ \hline
+    11 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}arm\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}season\\ (0.3143)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}house\\ (0.3738)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}ticking\\ (0.2464)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}child\\ (0.1360)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}live\\ (0.2647)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}heart\\ (0.1766)\end{tabular} \\ \hline
+    12 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}desire\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}hoy\\ (0.3100)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}james\\ (0.3732)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}flannel\\ (0.2554)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}mas\\ (0.1349)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}good\\ (0.2641)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}chain\\ (0.1706)\end{tabular} \\ \hline
+    13 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}owe\\ (0.016)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}garden\\ (0.3076)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}jones\\ (0.3614)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}apron\\ (0.2447)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}christ\\ (0.1348)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}woman\\ (0.2576)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}unto\\ (0.1676)\end{tabular} \\ \hline
+    14 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}institution\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}summer\\ (0.3075)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}reelection\\ (0.3614)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}cottonade\\ (0.2426)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}husband\\ (0.1315)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}god\\ (0.2567)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}faithful\\ (0.1599)\end{tabular} \\ \hline
+    15 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}measure\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}band\\ (0.3075)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}abraham\\ (0.3549)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}blanket\\ (0.2425)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}book\\ (0.1291)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}two\\ (0.2527)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}church\\ (0.1572)\end{tabular} \\ \hline
+    16 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}authority\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}ladle\\ (0.3018)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}representative\\ (0.3531)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}solicit\\ (0.2422)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}cony\\ (0.1283)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}know\\ (0.2502)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}poor\\ (0.1566)\end{tabular} \\ \hline
+    17 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}prohibit\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}excellent\\ (0.3007)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}mar\\ (0.3377)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}unusually\\ (0.2414)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}away\\ (0.1252)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}family\\ (0.2472)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}girl\\ (0.1533)\end{tabular} \\ \hline
+    18 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}excitement\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}hood\\ (0.2992)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}scat\\ (0.3239)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}hue\\ (0.2398)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}obedient\\ (0.1186)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}poor\\ (0.2446)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}write\\ (0.1526)\end{tabular} \\ \hline
+    19 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}judge\\ (0.015)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}children\\ (0.2991)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}nominate\\ (0.3204)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}coarse\\ (0.2373)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}bible\\ (0.1184)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}wife\\ (0.2398)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}father\\ (0.1442)\end{tabular} \\ \hline
+    20 & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}like\\ (0.014)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}dress\\ (0.2979)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}many\\ (0.2951)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}men\\ (0.2358)\end{tabular} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}sin\\ (0.1157)\end{tabular}} & \multicolumn{1}{c|}{\begin{tabular}[c]{@{}c@{}}like\\ (0.2366)\end{tabular}} & \begin{tabular}[c]{@{}c@{}}wife\\ (0.1425)\end{tabular} \\ \hline
+    \end{tabular}%
+    }
+    \caption{The cosine similarity ranking after deducting ``slave'' from ``servant''}
+    \label{tab:my-result-servant}
+  \end{table*}
+
+% \section{Example Appendix 2}
+% \label{sec:appendix}
+
+% This is an appendix B.
+
+\end{document}
