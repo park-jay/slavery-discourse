@@ -1,8 +1,8 @@
-PWD /Users/mstudio/repository/research/discourse-slavery/nlp4dh/latex
+PWD /Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex
 INPUT /usr/local/texlive/2024/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/mstudio/repository/research/discourse-slavery/nlp4dh/latex/acl_latex.tex
+INPUT /Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex/acl_latex.tex
 OUTPUT acl_latex.log
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/local/texlive/2024/texmf-dist/tex/latex/base/article.cls

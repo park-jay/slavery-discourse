@@ -133,7 +133,7 @@ In this paper, we present a computational approach to studying the use of these 
   \item RQ 2. How prevalent are the discourse words from the Southern and Northern newspapers in the entire corpus? 
 \end{itemize}
 
-To support open science and transparent data science, we publish the code used in this study at \url{available-upon-acceptance}.
+To support open science and transparent data science, we publish the code used in this study at \url{https://github.com/park-jay/slavery-discourse}.
 
 \section{Related Works}
 
@@ -173,6 +173,7 @@ By approaching racial bias embedded in language use within newspapers, rather th
 \section{Data} \label{data}
 \subsection{Data Collection} \label{data collection}
 
+Through digitization, many archival materials have been made available to the public \cite{dobreski2020remodeling}.
 Among many available public datasets for 19th century newspapers, we used Chronicling America as a source for data collection. 
 We did not use any other sources in order to keep consistency in OCR errors (Some digitized newspapers have article breaks, meaning document is article-level but Chronicling America does not have article breaks, having digitization at page-level.).
 Of data available in Chronicling America, if it is digitized through a high-resolution, lossless digital image of a microfilm copy, then the quality of data is relatively reliable \citep{lorang_electronic_2012}. 
@@ -259,31 +260,31 @@ Finally, human annotators coded whether the words listed as similar words could 
 
 \subsection{Human annotation decision process} \label{human annotation decision process}
 
-% \begin{algorithm}[h]
-%   \raggedright
-%   \caption{Human annotation process}\label{alg:human}
-%   \begin{algorithmic}[1]
-%   \STATE $dic$ $\leftarrow$ words in dictionary
-%   \STATE $sem$ $\leftarrow$ words semantically relevant
-%   \STATE $par$ $\leftarrow$ words with missing characters
-%   \STATE $fun$ $\leftarrow$ function words
-%   \STATE $gen$ $\leftarrow$ gender words
-%   \STATE $data$ $\leftarrow$ FastText Cosine similarity results
-%   \STATE $list$ $\leftarrow$ \{\}
-%   \FORALL{element $\in$ $data$}
-%     \IF{element $\in$ $dic$ \AND element $\notin$ $sem$}
-%       \STATE \textbf{continue}
-%     \ELSIF{element $\in$ $par$}
-%       \STATE \textbf{continue}
-%     \ELSIF{element $\notin$ $par$ \AND element $\in$ $fun$}
-%       \STATE $list$ $\leftarrow$ element
-%     \ELSIF{element $\notin$ $par$ \AND element $\in$ $gen$}
-%       \STATE $list$ $\leftarrow$ element
-%     \ENDIF
-%   \ENDFOR
-%   \STATE \textbf{return} $list$
-%   \end{algorithmic}
-% \end{algorithm}
+\begin{algorithm}[h]
+  \raggedright
+  \caption{Human annotation process}\label{alg:human}
+  \begin{algorithmic}[1]
+  \STATE $dic$ $\leftarrow$ words in dictionary
+  \STATE $sem$ $\leftarrow$ words semantically relevant
+  \STATE $par$ $\leftarrow$ words with missing characters
+  \STATE $fun$ $\leftarrow$ function words
+  \STATE $gen$ $\leftarrow$ gender words
+  \STATE $data$ $\leftarrow$ FastText Cosine similarity results
+  \STATE $list$ $\leftarrow$ \{\}
+  \FORALL{element $\in$ $data$}
+    \IF{element $\in$ $dic$ \AND element $\notin$ $sem$}
+      \STATE \textbf{continue}
+    \ELSIF{element $\in$ $par$}
+      \STATE \textbf{continue}
+    \ELSIF{element $\notin$ $par$ \AND element $\in$ $fun$}
+      \STATE $list$ $\leftarrow$ element
+    \ELSIF{element $\notin$ $par$ \AND element $\in$ $gen$}
+      \STATE $list$ $\leftarrow$ element
+    \ENDIF
+  \ENDFOR
+  \STATE \textbf{return} $list$
+  \end{algorithmic}
+\end{algorithm}
 
 Two human annotators (One is from information science background and the other is from literary studies background) read samples of OCR errors and coded without any discussion. 
 We had binary categories, which were ```include'' if it can be considered as OCR error or ``exclude'' if it is not considered to be OCR error. 
@@ -291,7 +292,7 @@ Our first round of intercoder reliability measure \citep{cohen_coefficient_1960}
 for ``slave'' and ``servant'' were substantial ($k$=0.73) and fair ($k$=0.39) agreement respectively \citep{viera_understanding_nodate}. 
 Two annotators discussed why disagreement arose. FastText returned ``slavery'' as a culture of practicing enslavement of Black and it was a mix of ``slavery'' OCR errors and ``slave'' OCR errors. 
 
-% Therefore, we set the rules to decide what to include and what to exclude and the logistics are provided in Algorithm \ref{alg:human}. 
+Therefore, we set the rules to decide what to include and what to exclude and the logistics are provided in Algorithm \ref{alg:human}. 
 Two annotators conceptualized $dic$ as the words appeared in dictionaries, $sem$ as the words semantically relevant words (e.g., ``slavery'') and $par$  as the words with missing characters (e.g., ``slav'', ``serva''), $fun$ as the function words which does not have semantical information as well as the characters (e.g., ``of'', ``for'', ``t''), and $gen$ as gender words (e.g., ``man'', ``woman''). 
 The human annotating process started with reading through the FastText Cosine similarity results and if the word can be found in the dictionary and not relevant to the word of interest (e.g., ``hold'', ``buy''), we excluded the word. 
 In the next step, two annotators checked whether the word has partial characters of the word of interest (e.g., ``sla''), if this was the case, the word was excluded because the actual word of it could have been  other words in dictionaries (e.g., ``slate'', ``slam''). 
@@ -498,6 +499,10 @@ This study adds to the scholarship on digital humanities by providing a computat
 % without our conscious and control \citep{zaagsma_digital_2023}. 
 % This limitation can speak to all historians who want to use computational method 
 % toward digitized historical newspapers \citep{allen2010historians}.
+
+\section{Acknowledgements} \label{acknowledgements}
+Authors would like to thank Matthew Kollmer, the PhD student in the School of Information Sciences at the University of Illinois at Urbana-Champaign, for his insightful comments on the manuscript and participating in the annotation process. 
+This research was in part supported by Eugene Garfield Doctoral Dissertation Fellowship 2024 from the Beta Phi Mu International Library and Information Studies Honor Society.
 
 \bibliography{custom}
 
