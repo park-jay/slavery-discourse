@@ -13,7 +13,7 @@ This repository contains materials for "A data-driven investigation of euphemist
 </mark>
 
 ```
-@inproceedings{park2023quantitative,
+@inproceedings{park2025euphemistic,
   title={A Data-driven Investigation of Euphemistic Language: Comparing the usage of "slave" and "servant" in 19th century US newspapers},
   author={Park, Jaihyun and Cordell, Ryan},
   booktitle={The 5th International Conference on Natural Language Processing for Digital Humanities},
