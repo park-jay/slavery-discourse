@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex acl_latex"] 1741768662.35665 "acl_latex.aux" "acl_latex.bbl" "acl_latex" 1741768664.57325 0
+["bibtex acl_latex"] 1742372238.65974 "acl_latex.aux" "acl_latex.bbl" "acl_latex" 1742372325.04263 0
   "./acl_natbib.bst" 1735081786 44731 623164d2ae4d5e9ba5d48ec6ad689499 ""
   "./custom.bib" 1741768651.45199 35426 99fe1542a987a9db1a3a0b4d09d41c31 ""
-  "acl_latex.aux" 1741768664.32671 11855 b58957dc42e1023b5780a4c3371a5feb "pdflatex"
+  "acl_latex.aux" 1742372324.77085 11855 b58957dc42e1023b5780a4c3371a5feb "pdflatex"
   (generated)
   "acl_latex.bbl"
   "acl_latex.blg"
   (rewritten before read)
-["pdflatex"] 1741768663.54934 "/Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex/acl_latex.tex" "acl_latex.pdf" "acl_latex" 1741768664.57345 0
-  "/Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex/acl_latex.tex" 1741768662.57549 85537 46d95f9ca35b0ae82b6945f4e5c8889b ""
+["pdflatex"] 1742372323.99042 "/Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex/acl_latex.tex" "acl_latex.pdf" "acl_latex" 1742372325.0428 0
+  "/Users/mstudio/repository/research/slavery-discourse/nlp4dh/latex/acl_latex.tex" 1742372323.7679 85536 7a1df2b140c098f1a1a9afbd72ac9b4c ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2024/texmf-dist/fonts/enc/dvips/inconsolata/i4-t1-0.enc" 1558214095 7631 5169ff1acd97ff1c4ab83563c99f96f4 ""
   "/usr/local/texlive/2024/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -143,10 +143,10 @@
   "/usr/local/texlive/2024/texmf-var/web2c/pdftex/pdflatex.fmt" 1735891209 8221439 aca41c944be88e87946cbef4b61f13c9 ""
   "/usr/local/texlive/2024/texmf.cnf" 1710266656 577 e590dabc9e28c5b61546e15f63eebcdf ""
   "acl.sty" 1735081786 11830 360307abc31eed6cc9974bc28f44bcc3 ""
-  "acl_latex.aux" 1741768664.32671 11855 b58957dc42e1023b5780a4c3371a5feb "pdflatex"
-  "acl_latex.bbl" 1741768662.45599 12990 c68fabf2a702e1b69ea161d638dcbb40 "bibtex acl_latex"
-  "acl_latex.out" 1741768664.32798 2715 9db4df1d12d8a61197c9b8a7be0a12f8 "pdflatex"
-  "acl_latex.tex" 1741768662.57549 85537 46d95f9ca35b0ae82b6945f4e5c8889b ""
+  "acl_latex.aux" 1742372324.77085 11855 b58957dc42e1023b5780a4c3371a5feb "pdflatex"
+  "acl_latex.bbl" 1742372238.76395 12990 c68fabf2a702e1b69ea161d638dcbb40 "bibtex acl_latex"
+  "acl_latex.out" 1742372324.77239 2715 9db4df1d12d8a61197c9b8a7be0a12f8 "pdflatex"
+  "acl_latex.tex" 1742372323.7679 85536 7a1df2b140c098f1a1a9afbd72ac9b4c ""
   "figure/servant-discourse.pdf" 1735114888.6 25680 f38b8b41400a3ea241798cc8c663282d ""
   "figure/slave-discourse.pdf" 1735114897.65 27376 acc4de7675537946d81a8b408c1fcbb5 ""
   (generated)
