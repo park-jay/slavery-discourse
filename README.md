@@ -14,15 +14,14 @@ This repository contains materials for "A data-driven investigation of euphemist
 
 ```
 @inproceedings{park2023quantitative,
-  title={A Quantitative Discourse Analysis of Asian Workers in the US Historical Newspapers},
+  title={A Data-driven Investigation of Euphemistic Language: Comparing the usage of "slave" and "servant" in 19th century US newspapers},
   author={Park, Jaihyun and Cordell, Ryan},
-  booktitle={The Joint 3rd International Conference on Natural Language Processing for Digital Humanities and 8th International Workshop on Computational Linguistics for Uralic Languages},
-  pages={7},
-  year={2023}
+  booktitle={The 5th International Conference on Natural Language Processing for Digital Humanities},
+  year={2025}
 }
 ```
 ## Abstract
-The digitization of historical texts invites researchers to explore the large-scale corpus of historical texts with computational methods. In this study, we present computational text analysis on a relatively understudied topic of how Asian workers are represented in historical newspapers in the United States. We found that the word ``coolie`` was semantically different in some States (e.g., Massachusetts, Rhode Island, Wyoming, Oklahoma, and Arkansas) with the different discourses around coolie. We also found that then-Confederate newspapers and then-Union newspapers formed distinctive discourses by measuring over-represented words. Newspapers from then-Confederate States associated coolie with slavery-related words. In addition, we found Asians were perceived to be inferior to European immigrants and subjected to the target of racism. This study contributes to supplementing the qualitative analysis of racism in the United States with quantitative discourse analysis.
+This study investigates the usage of “slave” and “servant” in the 19th century US newspapers using computational methods. While both terms were used to refer to enslaved African Americans, they were used in distinct ways. In the Chronicling America corpus, we included possible OCR errors by using FastText embedding and excluded text reprints to consider text reprint culture in the 19th century. Word2vec embedding was used to find semantically close words to “slave” and “servant” and log-odds ratio was calculated to identify over-represented discourse words in the Southern and Northern newspapers. We found that “slave” is associated with socio-economic, legal, and administrative words, however, “servant” is linked to religious words in the Northern newspapers while Southern newspapers associated “servant” with domestic and familial words. We further found that slave discourse words in Southern newspapers are more prevalent in Northern newspapers while servant discourse words from each side are prevalent in their own region. This study contributes to the understanding of how newspapers created different discourses around enslaved African Americans in the 19th century US.
 
 ## RQ 1: How different are the semantic meaning of ``coolie`` in each State?
 The code for this research question is available in the [RQ1-word2vec-token.ipynb](https://github.com/park-jay/coolie/blob/main/RQ1-word2vec-token.ipynb)

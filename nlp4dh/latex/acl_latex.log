@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.3)  19 MAR 2025 16:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.3)  19 MAR 2025 16:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -523,7 +523,10 @@ Underfull \hbox (badness 1147) in paragraph at lines 251--254
 
 [4]
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on input line 264.
- [5] [6]
+ [5]
+Underfull \vbox (badness 5288) has occurred while \output is active []
+
+ [6]
 Underfull \hbox (badness 2035) in paragraph at lines 386--388
 \T1/ptm/m/n/10.95 (+20) slavery news-pa-pers showed more religiously-
  []
@@ -558,16 +561,18 @@ Underfull \hbox (badness 5431) in paragraph at lines 56--59
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 512.
 
-<figure/slave-discourse.pdf, id=324, 650.43pt x 433.62pt>
+[10]
+<figure/slave-discourse.pdf, id=331, 650.43pt x 433.62pt>
 File: figure/slave-discourse.pdf Graphic file (type pdf)
 <use figure/slave-discourse.pdf>
 Package pdftex.def Info: figure/slave-discourse.pdf  used on input line 541.
 (pdftex.def)             Requested size: 455.24411pt x 303.50546pt.
-<figure/servant-discourse.pdf, id=325, 650.43pt x 433.62pt>
+<figure/servant-discourse.pdf, id=332, 650.43pt x 433.62pt>
 File: figure/servant-discourse.pdf Graphic file (type pdf)
 <use figure/servant-discourse.pdf>
 Package pdftex.def Info: figure/servant-discourse.pdf  used on input line 550.
 (pdftex.def)             Requested size: 455.24411pt x 303.50546pt.
+
 
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 557.
@@ -576,7 +581,9 @@ LaTeX Warning: No positions in optional float specifier.
 LaTeX Warning: No positions in optional float specifier.
                Default added (so using `tbp') on input line 589.
 
-[10] [11] [12 <./figure/slave-discourse.pdf>] [13 <./figure/servant-discourse.pdf>] [14] [15] (./acl_latex.aux)
+[11
+
+] [12] [13 <./figure/slave-discourse.pdf>] [14 <./figure/servant-discourse.pdf>] [15] [16] (./acl_latex.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
@@ -585,18 +592,18 @@ Package rerunfilecheck Info: File `acl_latex.out' has not changed.
 (rerunfilecheck)             Checksum: 9DB4DF1D12D8A61197C9B8A7BE0A12F8;2715.
  ) 
 Here is how much of TeX's memory you used:
- 15776 strings out of 474116
- 251573 string characters out of 5743683
- 2053187 words of memory out of 5000000
+ 15777 strings out of 474116
+ 251580 string characters out of 5743683
+ 2042187 words of memory out of 5000000
  37354 multiletter control sequences out of 15000+600000
  625746 words of font info for 383 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,17n,93p,1302b,731s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on acl_latex.pdf (15 pages, 248250 bytes).
+Output written on acl_latex.pdf (16 pages, 249354 bytes).
 PDF statistics:
- 505 PDF objects out of 1000 (max. 8388607)
- 391 compressed objects within 4 object streams
- 107 named destinations out of 1000 (max. 500000)
+ 509 PDF objects out of 1000 (max. 8388607)
+ 394 compressed objects within 4 object streams
+ 108 named destinations out of 1000 (max. 500000)
  61587 words of extra memory for PDF output out of 61914 (max. 10000000)
 
