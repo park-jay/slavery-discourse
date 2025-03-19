@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.3)  19 MAR 2025 16:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.1.3)  19 MAR 2025 17:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -549,7 +549,7 @@ Overfull \hbox (0.58598pt too wide) in paragraph at lines 414--417
  []
 
 [7]
-Overfull \hbox (0.91475pt too wide) in paragraph at lines 434--436
+Overfull \hbox (0.91475pt too wide) in paragraph at lines 435--437
 []\T1/ptm/m/n/10.95 (-20) By demon-strat-ing that dis-course around ``ser-vant''
  []
 
@@ -561,25 +561,25 @@ Underfull \hbox (badness 5431) in paragraph at lines 56--59
 [9])
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 513.
+               Default added (so using `tbp') on input line 514.
 
 <figure/slave-discourse.pdf, id=322, 650.43pt x 433.62pt>
 File: figure/slave-discourse.pdf Graphic file (type pdf)
 <use figure/slave-discourse.pdf>
-Package pdftex.def Info: figure/slave-discourse.pdf  used on input line 542.
+Package pdftex.def Info: figure/slave-discourse.pdf  used on input line 543.
 (pdftex.def)             Requested size: 455.24411pt x 303.50546pt.
 <figure/servant-discourse.pdf, id=323, 650.43pt x 433.62pt>
 File: figure/servant-discourse.pdf Graphic file (type pdf)
 <use figure/servant-discourse.pdf>
-Package pdftex.def Info: figure/servant-discourse.pdf  used on input line 551.
+Package pdftex.def Info: figure/servant-discourse.pdf  used on input line 552.
 (pdftex.def)             Requested size: 455.24411pt x 303.50546pt.
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 558.
+               Default added (so using `tbp') on input line 559.
 
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 590.
+               Default added (so using `tbp') on input line 591.
 
 [10] [11] [12 <./figure/slave-discourse.pdf>] [13 <./figure/servant-discourse.pdf>] [14] [15] (./acl_latex.aux)
  ***********
@@ -590,15 +590,15 @@ Package rerunfilecheck Info: File `acl_latex.out' has not changed.
 (rerunfilecheck)             Checksum: 9DB4DF1D12D8A61197C9B8A7BE0A12F8;2715.
  ) 
 Here is how much of TeX's memory you used:
- 15772 strings out of 474116
- 251529 string characters out of 5743683
+ 15769 strings out of 474116
+ 251499 string characters out of 5743683
  2053187 words of memory out of 5000000
  37353 multiletter control sequences out of 15000+600000
- 625806 words of font info for 381 fonts, out of 8000000 for 9000
+ 625581 words of font info for 379 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  90i,17n,93p,1302b,731s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2024/texmf-dist/fonts/type1/public/inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2024/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on acl_latex.pdf (15 pages, 248007 bytes).
+Output written on acl_latex.pdf (15 pages, 248034 bytes).
 PDF statistics:
  503 PDF objects out of 1000 (max. 8388607)
  389 compressed objects within 4 object streams

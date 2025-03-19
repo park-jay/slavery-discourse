@@ -300,19 +300,19 @@ In order to reduce false positives as many as possible and to make the logic of 
 If the word from FastText entailed the extra characters on the tail (e.g., ``slaveto'', ``slavewith'') and they were the function words which does not convey information in terms of semantics, the annotators regarded it as OCR errors with tokenization and included in the OCR error candidates. 
 Last but not least, annotators checked whether the words attached the gender-related words on the tail (e.g., ``slaveman'', ``servantwoman'') and if this was the case, we included as one of the possible OCR error candidates. 
 
-The average Levenshtein distance \citep{levenshtein_binary_1966} of the OCR error candidates for ``servant'' is 80.48 while ``slave'' is 75.89. 
-The standard deviation for ``servant'' is 8.81 when ``slave'' is 9.92. 
+The average Levenshtein distance \citep{levenshtein_binary_1966} of the OCR error candidates for ``slave'' is 75.89 while ``servant'' is 80.48. 
+The standard deviation for ``slave'' is 9.92 when ``servant'' is 8.81. 
 With these OCR candidates, we added the snippet of OCR candidates and the final size of dataset for this study is presented in Table \ref{tab:data}. 
 Overall, the size of snippets after including OCR error candidates increased 5,765 for servant data (1.15\%) and 14,241 for slave data (1.07\%).    
 
 \subsection{Text reprints deduplication} \label{text reprints deduplication}
 19th century American newspapers reprinted texts from a wide range of genres: news reports, recipes, trivia, lists, vignettes, and religious reflections \citep{cordell__2017}. 
 Text reprints could also include boilerplate that appeared across many issues of the same paper, such as advertisements. 
-
 A business might buy advertisement space for multiple weeks, months, or even years, and those ads would be left in standing type from issue to issue. 
+
 In a study such as this one, focused on textual reuse, an ad that includes a keyword of interest but which appears day after day can disproportionately influence the statistical relationship between words in the corpus, leading our model to overestimate the importance of words within the ad relative to the words in texts that changed each day. In other words, if one particular phrase repeatedly appears, then the embedding model will overfit the phrase because of the distorted distribution of the text. However, it is hard to detect reprints based on keyword searches because of OCR errors. 
 
-Here we adopt the text-reuse detection methods, as described in \citet{smith_detecting_2014} , which use n-gram document representations to detect text reprints within errorful OCR-derived text. 
+Here we adopt the text-reuse detection methods, as described in \citet{smith_detecting_2014}, which use n-gram document representations to detect text reprints within errorful OCR-derived text. 
 We processed our corpus with a 5-gram chunking using NLTK whitespace tokenizer and further made a judgment that the text has been reprinted when there were more than three matches of 5-grams across the snippets. 
 For deduplication, we kept only the first snippet among multiple reprints. 
 
@@ -326,7 +326,7 @@ After the deduplication process, the size of the snippets decreased by 13,533 in
 The final size used for the analysis is provided in Table \ref{tab:data}.
 
 \subsection{Word2vec embedding} \label{word2vec embedding}
-Once we garnered snippets of the text where ``slave'' and ``servant'' including possible OCR error candidates and excluding text reprints, we trained Word2vec model \citep{mikolov_distributed_2013} to leverage CBOW (Continuous Bags of Words) and Skip-gram model.
+Once we prepared snippets of the text where ``slave'' and ``servant'' including possible OCR error candidates and excluding text reprints, we trained Word2vec model \citep{mikolov_distributed_2013} to leverage CBOW (Continuous Bags of Words) and Skip-gram model.
 % Both CBOW and Skip-gram models find word representations by taking the surrounding words into a consideration. 
 % While CBOW models the words before and after of the word of interest, Skip-gram takes the word of interest to predict surrounding words. 
 % Word2vec embedding is widely used by digital humanities scholars to computationally extract the semantics of the given word. 
@@ -347,7 +347,7 @@ In order to answer RQ2, where we address how the words close to ``slave'' and ``
 \label{eq: log-odds ratio}
 \end{equation}
 
-The log-odds ratio with informative Dirichlet of each word $w$ between two corpora $i$ and $j$ (in our study, newspapers from North and South) given the prior frequencies are obtained from the entire corpus $a$. When $n^{i}$ is the total number of words in corpus $i$, $y_{w}^{i}$ is the number of times word $w$ appears in corpus $i$,$a_{0}$ is the size of the corpus $a$, and
+The log-odds ratio with informative Dirichlet of each word $w$ between two corpora $i$ and $j$ (in our study, newspapers from the North and the South) given the prior frequencies are obtained from the entire corpus $a$. When $n^{i}$ is the total number of words in corpus $i$, $y_{w}^{i}$ is the number of times word $w$ appears in corpus $i$, $a_{0}$ is the size of the corpus $a$, and
 $a_{w}$ is the frequency of word $w$ in corpus $a$ \citep{kwak2020systematic}.
 With the log-odds ratio, we can identify the words that are over-represented 
 in the corpora \citep{park2023quantitative, park2024you}.
@@ -376,7 +376,7 @@ Socio-economic, legal, and administrative words are prevalent in slave discourse
 For instance, ``congress'' (from \textit{Edgefield Advertiser} and \textit{Green Mountain Freeman}), ``constitution'' (from \textit{Edgefield Advertiser} and \textit{Green Mountain Freeman}), ``legislate'' (from \textit{Edgefield Advertise} and \textit{Green Mountain Freeman}), ``nation'' (from \textit{Abbeville Banner}), and ``commonwealth'' (from \textit{Daily Dispatch}) can be considered words with legal and administrative implications.
 
 Words such as ``attempt,'' ``death,'' ``punishment,'' ``violation,'' and ``crime,'' might be pertinent to the frame that pro-slavery newspaper had tried to scheme.
-Similarly, we can also observe ``fugitive'' from Edgefield Advertiser.
+Similarly, we can also observe ``fugitive'' from \textit{Edgefield Advertiser}.
 However, \textit{Daily Dispatch} contains more words implying negative or violent actions from slaves than any other newspapers.
 
 We also able to observe that economic words like ``profit'' (From \textit{Abbeville Banner}) and ``labor'' (From \textit{Abbeville Banner} and \textit{Nashville Union and American}).
@@ -385,10 +385,10 @@ In addition, the words around how to rebuild the nation after the Civil War is a
 Contrary to slave discourse, which was largely unanimous across pro-slavery and anti-slavery newspapers, servant discourse was starkly divided by the newspapers' stance toward slavery.
 
 While pro-slavery newspapers from the South showed more words around domesticity, anti-slavery newspapers showed more religiously-inflected words.
-We can find words like ``table,'' ``ice,'' ``furniture,'' ``garden,'' ``ladle,'' and ``dress'' closely aligned with "servernt" in the \textit{Daily Dispatch}, ``seat,'' ``cook,'' and ``house,'' in the \textit{Edgefield Advertiser}, ``linen,'' ``bed,'' ``shirt,'' ``dress,'' ``cook,'' ``flannel,'' ``apron,''  ``cottonade,'' and ``blanket'' in the \textit{Nashville Union and American}, all pro-slavery newspapers. 
+We can find words like ``table,'' ``ice,'' ``furniture,'' ``garden,'' ``ladle,'' and ``dress'' closely aligned with "servant" in the \textit{Daily Dispatch}, ``seat,'' ``cook,'' and ``house,'' in the \textit{Edgefield Advertiser}, ``linen,'' ``bed,'' ``shirt,'' ``dress,'' ``cook,'' ``flannel,'' ``apron,''  ``cottonade,'' and ``blanket'' in the \textit{Nashville Union and American}, all pro-slavery newspapers. 
 
 In addition, we observed that the words associated with a good demeanor that conforms to white supremacist societal hierarchies appeared regardless of the papers' stance toward slavery.
-For instance, ``respectfully'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}) ``obedient'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}), ``humble'' (from \textit{National Era}).
+For instance, ``respectfully'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}) ``obedient'' (from \textit{Edgefield Advertiser}, \textit{Green Mountain Freeman}, and \textit{National Era}), and ``humble'' (from \textit{National Era}).
 
 However, religiously laden words are unique to anti-slavery newspapers. The words like ``bible,'' ``jesus,'' (from \textit{Anti-slavery Bugle}) ``god'' (from \textit{Green Mountain Freeman} and \textit{National Era}), ``christ,'' (\textit{Anti-slavery Bugle} and \textit{National Era}), ``faithful'' (\textit{National Era}) can be religious words.
 
@@ -425,7 +425,8 @@ Unfortunately, slave discourse from newspapers does not show how subjugated life
 % For anti-slavery stance newspapers, there seems no space for afflicted life of slaves to achieve victory in the crusade for value and moral war against the wrong. 
 
 We also found that the slave discourse words from the South are over-represented in Northern newspapers.
-We hypothesize that this is because the slave discourse words are based on the political, legal, and economic situations of the United States. Since the slave discourse words from the Northern newspapers are also talking about slaves in the similar fashion, the words from the South are also frequently used in the Northern newspapers.
+We hypothesize that this is because the slave discourse words are based on the political, legal, and economic situations of the United States. 
+Since the discourse around slave-related words from the Northern newspapers discusses slaves in a similar manner, the words from the South are also frequently used in Northern newspapers.
 
 Contrary to iron-hearted accounts for slaves, servant discourse contains words for family, and every-day life of servants. 
 In addition to domestic work of the duty of servants, words related to family can be emotional. 
@@ -435,7 +436,7 @@ By demonstrating that discourse around ``servant'' in Southern newspapers euphem
 Even though \textit{Gone with the Wind}, published in 1936, is attributed to the claim of re-construction of nostalgic South, we observed the emergence of early prototype of creating nostalgic South by associating ``servants'' with sentimental and patronizing words. 
 
 We find that Southern newspapers were far more likely to use words that created a sentimental or nostalgic image of the South and the slave system.
-Servant discourse words from the South are not frequently used in the Northern newspapers. This uniqueness can explain how the word ``servant'' is used euphemistically to describe domestic slaves in the South, downplaying their forced servitude by using a more neutral, domestic words. 
+Servant discourse words from the South are not frequently used in the Northern newspapers. This uniqueness helps explain how the word ``servant'' is used euphemistically to describe domestic slaves in the South, downplaying their forced servitude by using more neutral, domestic words. 
 Though on the surface, ``servant'' might seem like a more benign and positive word than ``slave'', the patterns of word usage in the newspapers suggest how Southern newspapers language worked rhetorically to stereotype Black Americans and sanitize the brutal system of oppression and subjugation.
 
 % used to describe servants in the South may seem more benign, they are still part of a larger system of oppression and subjugation.
