@@ -158,9 +158,9 @@ Especially, newspapers as a source of data attracted computational humanities re
 % Similarly, \citet{soni2021abolitionist} used a diachronic embedding model to trace the trajectory of changes in the semantics of words from abolitionist newspapers.
 % \citet{klein_exploratory_2015} also used LDA topic modeling on abolitionist newspapers to increase the process of sense-making by prototyping a visualization toolkit. 
 
-In conjunction with GIS (Geolocation Information System), \citet{franzosi_ways_2012} used quantitative narrative analysis to focus on 5W (Who, What, When, Where, and Why) from a journalist perspective to process essential information about lynching to visualize occurrences of lynching on maps.
-Despite abundant scholarly work developing quantitative approaches to studying anti-slavery newspapers, thus far no work has sought to address indirect writing, such as euphemism and stereotypes, computationally. 
-For example, \citet{narayan_slavery_2020} conducted research on Southern newspapers to argue that there was a fear toward Black Americans due to the possibilities of riot and political turmoil, but this paper does not address the question of stereotyping directly. 
+% In conjunction with GIS (Geolocation Information System), \citet{franzosi_ways_2012} used quantitative narrative analysis to focus on 5W (Who, What, When, Where, and Why) from a journalist perspective to process essential information about lynching to visualize occurrences of lynching on maps.
+% Despite abundant scholarly work on developing quantitative approaches to studying anti-slavery newspapers, thus far no work has sought to address indirect writing, such as euphemism and stereotypes, computationally. 
+% For example, \citet{narayan_slavery_2020} conducted research on Southern newspapers to argue that there was a fear toward Black Americans due to the possibilities of riot and political turmoil, but this paper does not address the question of stereotyping directly. 
 
 More relevant to our study, \citet{gabrial2004melancholy} claimed that there is discourse in newspapers around the idea of ``a good negro'' by showing cases where newspapers reported that they could stop race riots thanks to ``loyal'' Black Americans (e.g., ``a servant prompted by attachment to his master revealed the conspiracy'', ``some faithful Blacks had informed the Charleston City Council'' p.310). 
 The work of \citet{gabrial2004melancholy} illustrates that newspapers framed accounts of Black Americans to maintain white supremacy.
@@ -205,13 +205,14 @@ The detail of information of our newspapers is provided in Table \ref{tab:data} 
 \subsection{Data preparation} \label{data preparation}
 19th century newspapers have multiple columns \citep{smith_computational_2015}.
 This made Chronicling America scan the entire page of the newspaper rather than splitting the text based on sections or articles. 
-This characteristic poses difficulties in processing the text. 
-Since our study focuses on specific words (i.e., ``slave'' and ``servant''),
+Unfortunatley, this characteristic poses difficulties in processing the text. 
+Our study focuses on specific words (i.e., ``slave'' and ``servant''),
 % and how they were used, 
-taking the entire page to build the embeddings for each word would incorporate unnecessary information into the model. 
+so building embeddings from the entire page would introduce unnecessary information into the model.
+% taking the entire page to build the embeddings for each word would incorporate unnecessary information into the model. 
 In addition, the poor quality of OCRed text provides a wrong position of where the sentence ends. Therefore, as a way of reduce the problems stated above, we read the OCR text by line and took where the word of interest appeared.
 
-Since our data does not include article breaks, we identified passages where our keywords (``slave'' or ``servant,'' respectively) appeared, and then defined a window of two lines before and after where the keyword appeared. 
+As a way of addressing this problem, we identified passages where our keywords (``slave'' or ``servant,'' respectively) appeared, and then defined a window of two lines before and after where the keyword appeared. 
 While this method does not perfectly align with article breaks, it does capture more of the context around our keywords without including the full text of the page, which might include significant amounts of text that is entirely irrelevant to the topics we are studying. 
 These snippets are the primary data studied using the methods outlined below. 
 Once we identified the index of the line where the word of interest appeared, we took the subset of the data with one line before and after to make a snippet. 
@@ -291,13 +292,13 @@ Our first round of intercoder reliability measure \citep{cohen_coefficient_1960}
 for ``slave'' and ``servant'' were substantial ($k$=0.73) and fair ($k$=0.39) agreement respectively \citep{viera_understanding_nodate}. 
 Two annotators discussed why disagreement arose. FastText returned ``slavery'' as a culture of practicing enslavement of Black and it was a mix of ``slavery'' OCR errors and ``slave'' OCR errors. 
 
-Therefore, we set the rules to decide what to include and what to exclude and the logistics are provided in Algorithm \ref{alg:human}. 
-Two annotators conceptualized $dic$ as the words appeared in dictionaries, $sem$ as the words semantically relevant words (e.g., ``slavery'') and $par$  as the words with missing characters (e.g., ``slav'', ``serva''), $fun$ as the function words which does not have semantical information as well as the characters (e.g., ``of'', ``for'', ``t''), and $gen$ as gender words (e.g., ``man'', ``woman''). 
+Therefore, we set more specific rules to decide what to include and what to exclude and the logistics are provided in Algorithm \ref{alg:human}. Two annotators conceptualized $dic$ as the words appeared in dictionaries, $sem$ as the words semantically relevant words (e.g., ``slavery'') and $par$ as the words with missing characters (e.g., ``slav'', ``serva''), $fun$ as the function words which does not have semantical information as well as the characters (e.g., ``of'', ``for'', ``t''), and $gen$ as gender words (e.g., ``man'', ``woman''). 
 The human annotating process started with reading through the FastText Cosine similarity results and if the word can be found in the dictionary and not relevant to the word of interest (e.g., ``hold'', ``buy''), we excluded the word. 
 In the next step, two annotators checked whether the word has partial characters of the word of interest (e.g., ``sla''), if this was the case, the word was excluded because the actual word of it could have been  other words in dictionaries (e.g., ``slate'', ``slam''). 
-
 In order to reduce false positives as many as possible and to make the logic of choosing OCR error candidates as less greedy as possible, the words with partial characters were excluded. 
-If the word from FastText entailed the extra characters on the tail (e.g., ``slaveto'', ``slavewith'') and they were the function words which does not convey information in terms of semantics, the annotators regarded it as OCR errors with tokenization and included in the OCR error candidates. Last but not least, annotators checked whether the words attached the gender-related words on the tail (e.g., ``slaveman'', ``servantwoman'') and if this was the case, we included as one of the possible OCR error candidates. 
+
+If the word from FastText entailed the extra characters on the tail (e.g., ``slaveto'', ``slavewith'') and they were the function words which does not convey information in terms of semantics, the annotators regarded it as OCR errors with tokenization and included in the OCR error candidates. 
+Last but not least, annotators checked whether the words attached the gender-related words on the tail (e.g., ``slaveman'', ``servantwoman'') and if this was the case, we included as one of the possible OCR error candidates. 
 
 The average Levenshtein distance \citep{levenshtein_binary_1966} of the OCR error candidates for ``servant'' is 80.48 while ``slave'' is 75.89. 
 The standard deviation for ``servant'' is 8.81 when ``slave'' is 9.92. 

@@ -11,45 +11,45 @@ Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
 Database file #1: custom.bib
 Warning--entry type for "willaert2022tracking" isn't style-file defined
 --line 614 of file custom.bib
-You've used 44 entries,
+You've used 43 entries,
             3734 wiz_defined-function locations,
-            999 strings with 14930 characters,
-and the built_in function-call counts, 29963 in all, are:
-= -- 2725
-> -- 1108
+            992 strings with 14652 characters,
+and the built_in function-call counts, 29232 in all, are:
+= -- 2658
+> -- 1078
 < -- 39
-+ -- 404
-- -- 340
-* -- 1780
-:= -- 4455
-add.period$ -- 193
-call.type$ -- 44
-change.case$ -- 357
-chr.to.int$ -- 47
-cite$ -- 44
-duplicate$ -- 1942
-empty$ -- 2362
-format.name$ -- 447
-if$ -- 6646
++ -- 394
+- -- 331
+* -- 1730
+:= -- 4349
+add.period$ -- 188
+call.type$ -- 43
+change.case$ -- 348
+chr.to.int$ -- 46
+cite$ -- 43
+duplicate$ -- 1894
+empty$ -- 2307
+format.name$ -- 435
+if$ -- 6488
 int.to.chr$ -- 2
 int.to.str$ -- 1
-missing$ -- 411
-newline$ -- 236
-num.names$ -- 176
-pop$ -- 864
+missing$ -- 400
+newline$ -- 230
+num.names$ -- 172
+pop$ -- 846
 preamble$ -- 1
-purify$ -- 289
+purify$ -- 282
 quote$ -- 0
-skip$ -- 1668
+skip$ -- 1631
 stack$ -- 0
-substring$ -- 1208
-swap$ -- 1009
+substring$ -- 1179
+swap$ -- 981
 text.length$ -- 16
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 363
+type$ -- 354
 warning$ -- 0
-while$ -- 193
+while$ -- 188
 width$ -- 0
-write$ -- 593
+write$ -- 578
 (There was 1 warning)
