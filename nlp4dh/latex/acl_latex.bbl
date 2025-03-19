@@ -1,4 +1,4 @@
-\begin{thebibliography}{43}
+\begin{thebibliography}{44}
 \providecommand{\natexlab}[1]{#1}
 
 \bibitem[{Abebe et~al.(2020)Abebe, Barocas, Kleinberg, Levy, Raghavan, and Robinson}]{abebe2020roles}
@@ -183,6 +183,11 @@ Rosalyn Narayan. 2020.
 Jaihyun Park and Ryan Cordell. 2023.
 \newblock A quantitative discourse analysis of asian workers in the us historical newspapers.
 \newblock In \emph{The Joint 3rd International Conference on Natural Language Processing for Digital Humanities and 8th International Workshop on Computational Linguistics for Uralic Languages}, page~7.
+
+\bibitem[{Park and Jeoung(2022)}]{park2022raison}
+Jaihyun Park and Sullam Jeoung. 2022.
+\newblock Raison d’{\^e}tre of the benchmark dataset: A survey of current practices of benchmark dataset sharing platforms.
+\newblock In \emph{Proceedings of NLP Power! The First Workshop on Efficient Benchmarking in NLP}, pages 1--10.
 
 \bibitem[{Park et~al.(2024)Park, Yang, Tolbert, and Bunsold}]{park2024you}
 Jaihyun Park, JungHwan Yang, Amanda Tolbert, and Katherine Bunsold. 2024.
